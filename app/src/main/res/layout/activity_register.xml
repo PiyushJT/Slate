@@ -51,7 +51,7 @@
         android:id="@+id/firebase"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="16dp"
         android:gravity="center_horizontal|top"
         android:lineSpacingExtra="-8sp"
         android:text="@string/app_name"
@@ -67,10 +67,10 @@
         android:id="@+id/cardView"
         android:layout_width="320dp"
         android:layout_height="60dp"
-        android:layout_marginTop="44dp"
+        android:layout_marginTop="32dp"
+        android:backgroundTint="@color/background"
         app:cardCornerRadius="16dp"
         app:cardElevation="10dp"
-        android:backgroundTint="@color/background"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/firebase">
@@ -97,6 +97,39 @@
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/cardView3"
+        android:layout_width="320dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="8dp"
+        android:backgroundTint="@color/background"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cardView">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <EditText
+                android:id="@+id/usernameRegister"
+                android:layout_width="300dp"
+                android:layout_height="match_parent"
+                android:background="@android:color/transparent"
+                android:hint="@string/username"
+                android:inputType="textEmailAddress"
+                android:textSize="20sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
         android:id="@+id/cardView2"
         android:layout_width="320dp"
         android:layout_height="60dp"
@@ -106,7 +139,7 @@
         android:backgroundTint="@color/background"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cardView">
+        app:layout_constraintTop_toBottomOf="@+id/cardView3">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -149,7 +182,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="36dp"
                 android:gravity="center_horizontal"
-                android:text="Already have an account? "
+                android:text="@string/already_have_account"
                 android:textColor="@color/textColor"
                 android:textSize="20sp"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -161,7 +194,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="36dp"
                 android:gravity="center_horizontal"
-                android:text="Login"
+                android:text="@string/login"
                 android:textStyle="bold"
                 android:textColor="@color/textColor"
                 android:textSize="20sp"
@@ -179,7 +212,7 @@
         android:layout_height="60dp"
         android:layout_marginTop="32dp"
         android:backgroundTint="@color/orange"
-        android:text="Create Account"
+        android:text="@string/create_account"
         android:textColor="@color/textColor"
         android:textSize="22sp"
         app:cornerRadius="15dp"
