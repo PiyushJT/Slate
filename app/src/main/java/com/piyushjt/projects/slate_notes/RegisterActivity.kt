@@ -4,8 +4,6 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.piyushjt.projects.slate_notes.databinding.ActivityRegisterBinding
 
@@ -28,7 +26,6 @@ class RegisterActivity : AppCompatActivity() {
 
             // checking for emptiness and nulls
             if (email.isNotEmpty() && password.isNotEmpty() && username.isNotEmpty()) {
-                if (username != "null") {
 
                     // account creation
                     MainActivity.auth.createUserWithEmailAndPassword(email, password)
@@ -44,7 +41,8 @@ class RegisterActivity : AppCompatActivity() {
                                 // uploading the username
                                 addUsername(username, currentUserUid)
 
-                                startActivity(Intent(this, MainActivity::class.java))
+                                val intent= Intent(this, MainActivity::class.java)
+                                startActivity(intent)
                                 finish()
                             }
                         }
@@ -53,11 +51,6 @@ class RegisterActivity : AppCompatActivity() {
                             Toast.makeText(this, it.localizedMessage, Toast.LENGTH_LONG).show()
                         }
 
-                }
-                // if username is conflicted with default null
-                else {
-                    Toast.makeText(this, "username cannot be null", Toast.LENGTH_LONG).show()
-                }
             }
 
             // if all the details are not provided
