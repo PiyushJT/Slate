@@ -4,6 +4,9 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 import com.piyushjt.projects.slate_notes.databinding.ActivityRegisterBinding
 
 class RegisterActivity : AppCompatActivity() {
@@ -13,6 +16,7 @@ class RegisterActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
+
         // Creating account
         binding.createAccountBtn.setOnClickListener {
 
@@ -20,6 +24,7 @@ class RegisterActivity : AppCompatActivity() {
             val email = binding.emailRegister.text.toString()
             val username = binding.usernameRegister.text.toString()
             val password = binding.passwordRegister.text.toString()
+
 
             // checking for emptiness and nulls
             if (email.isNotEmpty() && password.isNotEmpty() && username.isNotEmpty()) {
@@ -31,26 +36,47 @@ class RegisterActivity : AppCompatActivity() {
 
                             // success
                             if (it.isSuccessful) {
+
+                                // getting user's id
+                                val currentUser = MainActivity.auth.currentUser
+                                val currentUserUid = currentUser?.uid.toString()
+
+                                // uploading the username
+                                addUsername(username, currentUserUid)
+
                                 startActivity(Intent(this, MainActivity::class.java))
                                 finish()
                             }
-
-                            // failure report
-                        }.addOnFailureListener {
+                        }
+                        // failure report
+                        .addOnFailureListener {
                             Toast.makeText(this, it.localizedMessage, Toast.LENGTH_LONG).show()
                         }
-                }
 
+                }
                 // if username is conflicted with default null
-                else{Toast.makeText(this, "username cannot be null", Toast.LENGTH_LONG).show()
+                else {
+                    Toast.makeText(this, "username cannot be null", Toast.LENGTH_LONG).show()
                 }
             }
 
             // if all the details are not provided
-            else{
+            else {
                 Toast.makeText(this, "Please fill all the details", Toast.LENGTH_LONG).show()
             }
         }
 
+    }
+
+
+    // function to upload the username to realtime database
+    private fun addUsername(username: String, userId: String) {
+
+        // Get a reference to the database
+        val database = FirebaseDatabase.getInstance()
+        val myRef = database.getReference("usernames/${userId}/username")
+
+        // Uploading the username
+        myRef.setValue(username)
     }
 }
