@@ -14,6 +14,12 @@ class RegisterActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
+        // going to loginActivity
+        binding.loginTV.setOnClickListener{
+            startActivity(Intent(this, LoginActivity::class.java))
+            finish()
+        }
+
 
         // Creating account
         binding.createAccountBtn.setOnClickListener {

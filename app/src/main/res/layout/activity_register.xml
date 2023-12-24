@@ -151,7 +151,7 @@
                 android:layout_width="300dp"
                 android:layout_height="match_parent"
                 android:background="@android:color/transparent"
-                android:hint="@string/password"
+                android:hint="@string/create_password"
                 android:inputType="textPassword"
                 android:textSize="20sp"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -187,6 +187,8 @@
                 android:textColor="@color/textColor"
                 android:textSize="20sp"
                 app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/loginTV"
+                app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -194,12 +196,15 @@
                 android:id="@+id/loginTV"
                 android:layout_width="wrap_content"
                 android:layout_height="36dp"
+                android:layout_marginStart="4dp"
                 android:gravity="center_horizontal"
                 android:text="@string/login"
-                android:textStyle="bold"
                 android:textColor="@color/textColor"
                 android:textSize="20sp"
+                android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toEndOf="@+id/don_t_have_"
                 app:layout_constraintTop_toTopOf="parent" />
 
