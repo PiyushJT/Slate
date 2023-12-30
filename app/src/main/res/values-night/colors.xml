@@ -2,8 +2,7 @@
 <resources>
     <color name="background">#FF000000</color>
     <color name="textColor">#FFFFFFFF</color>
-    <color name="textColorLightest">#1AFFFFFF</color>
+    <color name="textColorLightest">#BBBBBB</color>
+    <color name="backgroundLightest">#494949</color>
     <color name="red">#f00</color>
-    <color name="orange">#ffa500</color>
-    <color name="yellow">#FFD500</color>
 </resources>

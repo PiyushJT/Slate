@@ -33,6 +33,11 @@ class MainActivity : AppCompatActivity() {
         }
 
 
+        // Checking for internet Connection
+        if (!Utils.isNetworkAvailable(this)) {
+            Utils.showNoInternetDialog(this)
+        }
+
         // signing out the user
         binding.signOut.setOnClickListener {
             auth.signOut()
@@ -59,7 +64,8 @@ class MainActivity : AppCompatActivity() {
             // retrieving username from realtime database
             currentUser.let {
                 // defining path to username
-                val noteReference = databaseReference.child("usernames").child(currentUserUid).child("username")
+                val noteReference =
+                    databaseReference.child("usernames").child(currentUserUid).child("username")
 
                 noteReference.addValueEventListener(object : ValueEventListener {
                     override fun onDataChange(snapshot: DataSnapshot) {
@@ -69,10 +75,11 @@ class MainActivity : AppCompatActivity() {
                         binding.userDetails.text = username
                         visibilitySignUpSignOut()
                     }
+
                     override fun onCancelled(error: DatabaseError) {}
                 })
             }
-        // if user have not signed in
+            // if user have not signed in
         } else {
             binding.userDetails.text = ""
             visibilitySignUpSignOut()

@@ -4,8 +4,12 @@
     <color name="black">#000000</color>
     <color name="white">#FFFFFF</color>
     <color name="textColor">#000000</color>
-    <color name="textColorLightest">#1A000000</color>
+    <color name="textColorLightest">#494949</color>
+    <color name="blackLightest">#494949</color>
+    <color name="backgroundLightest">#BBBBBB</color>
+    <color name="whiteLightest">#BBBBBB</color>
     <color name="red">#f00</color>
-    <color name="orange">#ffa500</color>
+    <color name="orange">#ff6e00</color>
     <color name="yellow">#FFD500</color>
+    <color name="themeColor">#E77E5F</color>
 </resources>

@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
     <string name="sign_in">Sign In</string>
     <string name="sign_out">Sign Out</string>
@@ -12,6 +12,8 @@
     <string name="password">Password</string>
     <string name="create_password">Create Password</string>
     <string name="create_account">Create Account</string>
+
+    <string name="client_id" tools:ignore="TypographyDashes">255206565046-nu0jfpud6sr9es88lnqm21hg292t9bol.apps.googleusercontent.com</string>
 
     <string name="app_name">Slate</string>
     <string name="title_activity_login">LoginActivity</string>

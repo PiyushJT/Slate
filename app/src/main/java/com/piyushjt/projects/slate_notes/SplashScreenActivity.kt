@@ -21,18 +21,24 @@ class SplashScreenActivity : AppCompatActivity() {
 
         // Loading realtime database while splash screen is running
         Handler().postDelayed({
-            val databaseReference = FirebaseDatabase.getInstance().reference
-            val myRef = databaseReference.child("usernames")
-            myRef.get().addOnSuccessListener {
-                val myData = it.value
-                startActivity(Intent(this, MainActivity::class.java))
-                finish()
-            }
-                .addOnFailureListener {
+
+            if (Utils.isNetworkAvailable(this)) {
+
+                val databaseReference = FirebaseDatabase.getInstance().reference
+                val myRef = databaseReference.child("usernames")
+                myRef.get().addOnSuccessListener {
+                    val myData = it.value
                     startActivity(Intent(this, MainActivity::class.java))
                     finish()
                 }
+                    .addOnFailureListener {
+                        startActivity(Intent(this, MainActivity::class.java))
+                        finish()
+                    }
+            } else {
+                startActivity(Intent(this, MainActivity::class.java))
+                finish()
+            }
         }, 1500) // 1.5 sec min. delay
-
     }
 }
