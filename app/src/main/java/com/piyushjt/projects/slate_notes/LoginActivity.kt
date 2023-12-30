@@ -7,7 +7,12 @@ import android.widget.Toast
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import com.piyushjt.projects.slate_notes.databinding.ActivityLoginBinding
 
 class LoginActivity : AppCompatActivity() {
@@ -76,8 +81,50 @@ class LoginActivity : AppCompatActivity() {
         MainActivity.auth.signInWithCredential(credential)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
-                    startActivity(Intent(this, MainActivity::class.java))
-                    finish()
+
+                    // initializing realtime database
+                    val databaseReference = FirebaseDatabase.getInstance().reference
+                    MainActivity.auth = FirebaseAuth.getInstance()
+
+                    // getting user's id
+                    val currentUser = MainActivity.auth.currentUser
+                    val currentUserUid = currentUser?.uid.toString()
+
+                    // retrieving username from realtime database
+                    currentUser.let {
+                        // defining path to username
+                        val noteReference =
+                            databaseReference.child("usernames").child(currentUserUid)
+                                .child("username")
+
+                        noteReference.addValueEventListener(object : ValueEventListener {
+                            override fun onDataChange(snapshot: DataSnapshot) {
+
+                                val username = snapshot.getValue(String::class.java).toString()
+
+                                if(username == "null"){
+
+                                    val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                                        .requestIdToken(getString(R.string.client_id))
+                                        .requestEmail()
+                                        .build()
+
+                                    val googleSignInClient = GoogleSignIn.getClient(this@LoginActivity, gso)
+
+                                    googleSignInClient.signOut()
+
+                                    Toast.makeText(this@LoginActivity, "This account is not registered", Toast.LENGTH_LONG).show()
+
+                                }else{
+                                    startActivity(Intent(this@LoginActivity, MainActivity::class.java))
+                                    finish()
+                                }
+                            }
+
+                            override fun onCancelled(error: DatabaseError) {}
+                        })
+                    }
+
                 }
             }.addOnFailureListener {
                 Toast.makeText(this, it.localizedMessage, Toast.LENGTH_LONG).show()

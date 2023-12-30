@@ -8,7 +8,7 @@
     <string name="dont_have_account">Don\'t Have An Account? </string>
     <string name="already_have_account">Already Have An Account? </string>
     <string name="email">Email</string>
-    <string name="username">Username</string>
+    <string name="username">Username <small> (also for google signUp) </small> </string>
     <string name="password">Password</string>
     <string name="create_password">Create Password</string>
     <string name="create_account">Create Account</string>

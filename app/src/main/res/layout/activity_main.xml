@@ -14,7 +14,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:text=""
-        android:textSize="20sp"
+        android:textSize="20dp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -27,7 +27,7 @@
         android:layout_marginTop="8dp"
         android:padding="0dp"
         android:text="@string/sign_in"
-        android:textSize="14sp"
+        android:textSize="14dp"
         app:layout_constraintStart_toEndOf="@+id/userDetails"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -39,7 +39,7 @@
         android:layout_marginTop="8dp"
         android:padding="0dp"
         android:text="@string/sign_out"
-        android:textSize="10sp"
+        android:textSize="10dp"
         android:visibility="invisible"
         app:layout_constraintStart_toEndOf="@+id/userDetails"
         app:layout_constraintTop_toTopOf="parent" />
