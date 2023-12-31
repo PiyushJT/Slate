@@ -1,9 +1,9 @@
 package com.piyushjt.projects.slate_notes
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
@@ -100,27 +100,36 @@ class LoginActivity : AppCompatActivity() {
                         noteReference.addValueEventListener(object : ValueEventListener {
                             override fun onDataChange(snapshot: DataSnapshot) {
 
+                                // Checking if the user has registered or not
                                 val username = snapshot.getValue(String::class.java).toString()
 
-                                if(username == "null"){
+                                // If not Registered
+                                if (username == "null") {
 
-                                    val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                                        .requestIdToken(getString(R.string.client_id))
-                                        .requestEmail()
-                                        .build()
+                                    val gso =
+                                        GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                                            .requestIdToken(getString(R.string.client_id))
+                                            .requestEmail()
+                                            .build()
 
-                                    val googleSignInClient = GoogleSignIn.getClient(this@LoginActivity, gso)
+                                    val googleSignInClient =
+                                        GoogleSignIn.getClient(this@LoginActivity, gso)
 
                                     googleSignInClient.signOut()
 
-                                    Toast.makeText(this@LoginActivity, "This account is not registered", Toast.LENGTH_LONG).show()
+                                    Toast.makeText(
+                                        this@LoginActivity,
+                                        "This account is not registered",
+                                        Toast.LENGTH_LONG
+                                    ).show()
 
+
+                                    // If registered
                                 }else{
                                     startActivity(Intent(this@LoginActivity, MainActivity::class.java))
                                     finish()
                                 }
                             }
-
                             override fun onCancelled(error: DatabaseError) {}
                         })
                     }
