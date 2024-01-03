@@ -12,4 +12,5 @@
     <color name="orange">#ff6e00</color>
     <color name="yellow">#FFD500</color>
     <color name="themeColor">#E77E5F</color>
+    <color name="transparent">#00000000</color>
 </resources>

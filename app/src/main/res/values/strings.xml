@@ -1,7 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
 
-    <string name="sign_in">Sign In</string>
-    <string name="sign_out">Sign Out</string>
+    <string name="log_out">Log Out</string>
     <string name="register">Register</string>
     <string name="login">Login</string>
 

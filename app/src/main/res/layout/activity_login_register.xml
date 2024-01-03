@@ -1,0 +1,453 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/backgroundLightest"
+    tools:context=".LoginRegisterActivity">
+
+
+    <!--   Title card View   -->
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="200dp"
+        android:layout_height="70dp"
+        android:layout_marginTop="-10dp"
+        android:backgroundTint="@color/orange"
+        android:elevation="10dp"
+        app:cardCornerRadius="12dp"
+        app:cardElevation="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+            <!--   Title Text   -->
+            <TextView
+                android:id="@+id/loginRegister"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/rubic_maps"
+                android:gravity="center"
+                android:text="@string/login"
+                android:textColor="@color/black"
+                android:textSize="36dp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.6" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+
+    <!--   background image   -->
+    <ImageView
+        android:id="@+id/backgroundImage"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:src="@drawable/flower_outline"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <!--   Login Screen card   -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/loginScreen"
+        android:layout_width="330dp"
+        android:layout_height="600dp"
+        android:layout_marginTop="65dp"
+        android:backgroundTint="@color/transparent"
+        app:cardElevation="0dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+            <!--   Rectangle - Triangle background   -->
+            <ImageView
+                android:id="@+id/loginBackground"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/rect_tri_one"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <!--   App Logo   -->
+            <ImageView
+                android:id="@+id/appLogo"
+                android:layout_width="170dp"
+                android:layout_height="170dp"
+                android:layout_marginTop="40dp"
+                android:src="@drawable/slate"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/loginBackground" />
+
+
+            <!--   Email input layout   -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/emailInputLayout"
+                android:layout_width="260dp"
+                android:layout_height="60dp"
+                android:layout_marginTop="20dp"
+                android:backgroundTint="@color/background"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/appLogo"
+                app:strokeColor="@color/orange"
+                app:strokeWidth="2dp">
+
+
+                <!--   Email Input Edit text in a constraint layout-->
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <EditText
+                        android:id="@+id/emailLogin"
+                        android:layout_width="260dp"
+                        android:layout_height="match_parent"
+                        android:autofillHints="emailAddress"
+                        android:background="@android:color/transparent"
+                        android:hint="@string/email"
+                        android:inputType="textEmailAddress"
+                        android:paddingStart="10dp"
+                        android:textSize="18dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:ignore="RtlSymmetry" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+
+            <!--   Password input layout   -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/passwordInputLayout"
+                android:layout_width="260dp"
+                android:layout_height="60dp"
+                android:layout_marginTop="32dp"
+                android:backgroundTint="@color/background"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/emailInputLayout"
+                app:strokeColor="@color/orange"
+                app:strokeWidth="2dp">
+
+
+                <!--   Password Input Edit text in a constraint layout-->
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <EditText
+                        android:id="@+id/passwordLogin"
+                        android:layout_width="260dp"
+                        android:layout_height="match_parent"
+                        android:autofillHints="password"
+                        android:background="@android:color/transparent"
+                        android:hint="@string/password"
+                        android:inputType="textPassword"
+                        android:paddingStart="10dp"
+                        android:textSize="18dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:ignore="RtlSymmetry" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+
+            <!--   Login Button   -->
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/loginBtn"
+                android:layout_width="180dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="45dp"
+                android:background="@drawable/gradient_button_long"
+                android:fontFamily="@font/nova_square"
+                android:hapticFeedbackEnabled="true"
+                android:text="@string/login"
+                android:textAllCaps="false"
+                android:textColor="@color/black"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@+id/loginBackground"
+                app:layout_constraintTop_toBottomOf="@+id/passwordInputLayout" />
+
+
+            <!--   Down Button   -->
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/downBtn"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="1dp"
+                android:layout_marginBottom="8dp"
+                android:src="@drawable/arrow_down"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+
+    <!--   Google Button   -->
+    <ImageView
+        android:id="@+id/googleBtnContainer"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:src="@drawable/circle"
+        app:layout_constraintBottom_toBottomOf="@+id/loginScreen"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/registerScreen" />
+
+    <ImageView
+        android:id="@+id/googleBtn"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:src="@drawable/google_svgrepo_com"
+        app:layout_constraintBottom_toBottomOf="@+id/loginScreen"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/registerScreen" />
+
+
+    <!--   Register Screen card-->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/registerScreen"
+        android:layout_width="330dp"
+        android:layout_height="600dp"
+        android:layout_marginTop="645dp"
+        android:backgroundTint="@color/transparent"
+        app:cardElevation="0dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+            <!--   Rectangle - Triangle background   -->
+            <ImageView
+                android:id="@+id/registerBackground"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/rect_tri_two"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <!--   up Button   -->
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/upBtn"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="1dp"
+                android:src="@drawable/arrow_up"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <!--   App Logo   -->
+            <ImageView
+                android:id="@+id/appLogo2"
+                android:layout_width="170dp"
+                android:layout_height="170dp"
+                android:layout_marginTop="100dp"
+                android:layout_marginEnd="50dp"
+                android:src="@drawable/slate"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/registerBackground" />
+
+
+            <!--   Username input layout for Register  -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/usernameInputLayout"
+                android:layout_width="260dp"
+                android:layout_height="60dp"
+                android:layout_marginTop="10dp"
+                android:backgroundTint="@color/background"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/appLogo2"
+                app:strokeColor="@color/orange"
+                app:strokeWidth="2dp">
+
+
+                <!--   username Input Edit text in a constraint layout-->
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <EditText
+                        android:id="@+id/usernameRegister"
+                        android:layout_width="260dp"
+                        android:layout_height="match_parent"
+                        android:autofillHints="emailAddress"
+                        android:background="@android:color/transparent"
+                        android:hint="@string/username"
+                        android:inputType="text"
+                        android:paddingStart="10dp"
+                        android:textSize="18dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:ignore="RtlSymmetry" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+
+            <!--            Email input layout for Register  -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/emailInputLayout2"
+                android:layout_width="260dp"
+                android:layout_height="60dp"
+                android:layout_marginTop="20dp"
+                android:backgroundTint="@color/background"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/usernameInputLayout"
+                app:strokeColor="@color/orange"
+                app:strokeWidth="2dp">
+
+
+                <!--   Email Input Edit text in a constraint layout-->
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <EditText
+                        android:id="@+id/emailRegister"
+                        android:layout_width="260dp"
+                        android:layout_height="match_parent"
+                        android:autofillHints="emailAddress"
+                        android:background="@android:color/transparent"
+                        android:hint="@string/email"
+                        android:inputType="textEmailAddress"
+                        android:paddingStart="10dp"
+                        android:textSize="18dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:ignore="RtlSymmetry" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+
+            <!--            Password input layout for Register  -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/passwordInputLayout2"
+                android:layout_width="260dp"
+                android:layout_height="60dp"
+                android:layout_marginTop="20dp"
+                android:backgroundTint="@color/background"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/emailInputLayout2"
+                app:strokeColor="@color/orange"
+                app:strokeWidth="2dp">
+
+
+                <!--   Password Input Edit text in a constraint layout-->
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <EditText
+                        android:id="@+id/passwordRegister"
+                        android:layout_width="260dp"
+                        android:layout_height="match_parent"
+                        android:autofillHints="password"
+                        android:background="@android:color/transparent"
+                        android:hint="@string/create_password"
+                        android:inputType="textPassword"
+                        android:paddingStart="10dp"
+                        android:textSize="18dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:ignore="RtlSymmetry" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+
+            <!--   Register Button   -->
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/registerBtn"
+                android:layout_width="180dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="30dp"
+                android:background="@drawable/gradient_button_long"
+                android:fontFamily="@font/nova_square"
+                android:hapticFeedbackEnabled="true"
+                android:text="@string/register"
+                android:textAllCaps="false"
+                android:textColor="@color/black"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/registerBackground"
+                app:layout_constraintTop_toBottomOf="@+id/passwordInputLayout2" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -3,4 +3,8 @@
         <item name="android:statusBarColor">@color/background</item>
         <item name="android:windowLightStatusBar">true</item>
     </style>
+
+
+    <style name="Theme.Slate" parent="Base.Theme.Slate" />
+
 </resources>
