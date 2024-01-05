@@ -1,16 +1,32 @@
 package com.piyushjt.projects.slate_notes
 
 import android.content.Intent
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
+import android.view.View
 import com.google.firebase.database.FirebaseDatabase
+import com.piyushjt.projects.slate_notes.databinding.ActivitySplashScreenBinding
 import pl.droidsonroids.gif.GifDrawable
 
 class SplashScreenActivity : AppCompatActivity() {
+    private lateinit var binding: ActivitySplashScreenBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_splash_screen)
+        binding= ActivitySplashScreenBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+
+        // optimising splash screen animation for low end devices
+        if (Build.VERSION.SDK_INT <= 29) {
+            binding.gifImageView.visibility= View.INVISIBLE
+            binding.slateLogo.visibility= View.VISIBLE
+        }else{
+            binding.gifImageView.visibility= View.VISIBLE
+            binding.slateLogo.visibility= View.INVISIBLE
+        }
+
 
         // making the animation non repeat
         val gifImageView = findViewById<pl.droidsonroids.gif.GifImageView>(R.id.gifImageView)
