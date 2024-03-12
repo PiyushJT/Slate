@@ -1,3 +1,21 @@
 <resources>
+
+
+    <!--    App Constants-->
     <string name="app_name">Slate</string>
+    <string name="login">login</string>
+    <string name="signup">signup</string>
+
+
+    <!--    Useless things but useful things-->
+    <string name="start_journey">Start Your Journey</string>
+    <string name="log_in_sign_up">Log in / Sign up to your account.</string>
+    <string name="useless_thought_1">Dive in! Scribble your first thought and take the plunge.</string>
+
+
+    <!--    useful things-->
+    <string name="all_notes">All Notes</string>
+
+
+
 </resources>

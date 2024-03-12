@@ -1,5 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+
+
     <color name="black">#000000</color>
+    <color name="blackLightest">#494949</color>
+    <color name="blackTransparent">#99000000</color>
+
     <color name="white">#FFFFFF</color>
+    <color name="whiteLightest">#BBBBBB</color>
+    <color name="whiteTransparent">#99FFFFFF</color>
+
+    <color name="themeColor">#E77E5F</color>
+    <color name="red">#f00</color>
+    <color name="orange">#ff5e00</color>
+    <color name="lime">#0f0</color>
+    <color name="yellow">#FFD500</color>
+    <color name="transparent">#00000000</color>
+
+
+
 </resources>

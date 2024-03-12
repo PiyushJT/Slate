@@ -17,6 +17,10 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    buildFeatures{
+        viewBinding = true
+    }
+
     buildTypes {
         release {
             isMinifyEnabled = false
@@ -47,4 +51,6 @@ dependencies {
     androidTestImplementation(libs.androidx.espresso.core)
     //noinspection UseTomlInstead
     implementation("androidx.core:core-splashscreen:1.0.1")  // Splash screen api
+    //noinspection UseTomlInstead,GradleDependency
+    implementation("com.google.android.material:material:1.3.0-alpha03")  // Floating button
 }

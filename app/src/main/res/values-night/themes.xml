@@ -1,11 +1,10 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Base.Theme.Slate" parent="Theme.Material3.DayNight.NoActionBar">
-
+    <style name="Base.Theme.Slate" parent="Theme.MaterialComponents.NoActionBar">
 
         <item name="android:statusBarColor">#000000</item>
         <item name="android:navigationBarColor">@color/black</item>
 
-
     </style>
+
 </resources>
