@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsKotlinAndroid)
+    id("com.google.gms.google-services")
 }
 
 android {
@@ -49,6 +50,15 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+
+    // Firebase
+    implementation(platform("com.google.firebase:firebase-bom:32.7.4"))
+    //noinspection UseTomlInstead
+    implementation("com.google.firebase:firebase-auth")
+    implementation(libs.firebase.auth)
+    implementation(libs.play.services.auth)
+
+
     //noinspection UseTomlInstead
     implementation("androidx.core:core-splashscreen:1.0.1")  // Splash screen api
     //noinspection UseTomlInstead,GradleDependency
