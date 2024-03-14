@@ -4,6 +4,8 @@ import android.view.View
 
 object Utils {
 
+
+    // Function to change visibility of views
     fun changeVisibility(views: List<View>, makeVisible: Boolean){
         if (makeVisible){
             for (view in views){

@@ -1,0 +1,1 @@
+**You can download all commit apks from here [`Here`](https://piyushjt.github.io/My-Apps/slate.html)**

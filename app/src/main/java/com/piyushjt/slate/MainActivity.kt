@@ -1,6 +1,7 @@
 package com.piyushjt.slate
 
 import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
@@ -21,8 +22,8 @@ class MainActivity : AppCompatActivity() {
 
     // LateInit
     private lateinit var binding: ActivityMainBinding
-    private lateinit var auth : FirebaseAuth
-    private lateinit var googleSignInClient : GoogleSignInClient
+    private lateinit var auth: FirebaseAuth
+    private lateinit var googleSignInClient: GoogleSignInClient
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,20 +34,22 @@ class MainActivity : AppCompatActivity() {
         Thread.sleep(1000)
         installSplashScreen()
 
-        binding= ActivityMainBinding.inflate(layoutInflater)
+        binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
 
         // authentication
-        auth= Firebase.auth
+        auth = Firebase.auth
 
 
         // googleSignInOption (gso)
-        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions
-            .DEFAULT_SIGN_IN).requestIdToken(getString(R.string.client_id))
+        val gso = GoogleSignInOptions.Builder(
+            GoogleSignInOptions
+                .DEFAULT_SIGN_IN
+        ).requestIdToken(getString(R.string.client_id))
             .requestEmail().build()
 
-        googleSignInClient= GoogleSignIn.getClient(this, gso)
+        googleSignInClient = GoogleSignIn.getClient(this, gso)
 
 
 
@@ -57,18 +60,25 @@ class MainActivity : AppCompatActivity() {
             var userLoginDetails = binding.loginDetail.text.toString()
 
 
-            if(userLoginDetails == "login"){
+
+            // Open Login view or Account activity
+            if (userLoginDetails == "login") {
 
                 val signInClient = googleSignInClient.signInIntent
                 launcher.launch(signInClient)
 
             }
-            else{
-                Toast.makeText(this, "You have logged in", Toast.LENGTH_SHORT).show()
+            else {
+
+                val accountActivity = Intent(this, Account::class.java)
+
+                accountActivity.putExtra("username", userLoginDetails)
+                startActivity(accountActivity)
+
+
             }
 
         }
-
 
 
     }
@@ -80,10 +90,13 @@ class MainActivity : AppCompatActivity() {
 
 
 
-    private fun changeUI(){
+    // Function to change UI on basis of login
+    private fun changeUI() {
 
 
-        val loginInfoUI= listOf(
+
+        // Defining Views
+        val loginInfoUI = listOf(
             binding.curvedArrowPointingToLogin,
             binding.materialCardView,
             binding.imageView2
@@ -97,19 +110,34 @@ class MainActivity : AppCompatActivity() {
         )
 
 
+
         val email = auth.currentUser?.email
 
-        if(email.isNullOrEmpty()){
+
+        // If user has not logged in
+        if (email.isNullOrEmpty()) {
             binding.loginDetail.text = getString(R.string.login)
 
 
             Utils.changeVisibility(loginInfoUI, true)
             Utils.changeVisibility(newNoteInfoUI, false)
 
-        }
-        else{
 
-            val name= email.substringBefore('@')
+
+        // If user has logged in
+        }
+        else {
+
+            // setting username   --> needs to be changed to realtime database (upload)
+            var name = email.substringBefore('@')
+
+            name =
+                if (name.length > 12) {
+                    name.subSequence(0, 12).toString()
+                } else {
+                    name
+                }
+
 
             binding.loginDetail.text = name
 
@@ -126,26 +154,24 @@ class MainActivity : AppCompatActivity() {
     // Google sign in
     private val launcher = registerForActivityResult(
         ActivityResultContracts
-        .StartActivityForResult()){
+            .StartActivityForResult()){
         result ->
 
-        if(result.resultCode== Activity.RESULT_OK){
+        if (result.resultCode == Activity.RESULT_OK) {
             val task = GoogleSignIn.getSignedInAccountFromIntent(result.data)
 
-            val account: GoogleSignInAccount?= task.result
-            val credential= GoogleAuthProvider.getCredential(account?.idToken, null)
+            val account: GoogleSignInAccount? = task.result
+            val credential = GoogleAuthProvider.getCredential(account?.idToken, null)
 
             auth.signInWithCredential(credential)
                 .addOnCompleteListener {
-                    if(it.isSuccessful){
+                    if (it.isSuccessful) {
                         changeUI()
                     }
                 }
 
 
-
-        }
-        else{
+        } else {
             Toast.makeText(this, "Login Failed", Toast.LENGTH_SHORT).show()
         }
     }

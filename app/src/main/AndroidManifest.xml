@@ -12,17 +12,29 @@
         android:supportsRtl="true"
         android:theme="@style/Base.Theme.Slate"
         tools:targetApi="31">
+
+
+        <!--    Account Activity-->
+        <activity
+            android:name=".Account"
+            android:exported="false"
+            android:screenOrientation="portrait"/>
+
+
+        <!--    Main Activity-->
         <activity
             android:name=".MainActivity"
-            android:theme="@style/Theme.App.SplashScreen"
+            android:exported="true"
             android:screenOrientation="portrait"
-            android:exported="true">
+            android:theme="@style/Theme.App.SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+
     </application>
 
 </manifest>

@@ -4,7 +4,10 @@
     <!--    App Constants-->
     <string name="app_name">Slate</string>
     <string name="login">login</string>
-    <string name="signup">signup</string>
+    <string name="log_out">Log Out</string>
+    <string name="username">Username</string>
+    <string name="your_acc">Your Account</string>
+    <string name="save">Save</string>
 
 
     <!--    Useless things but useful things-->
@@ -15,7 +18,6 @@
 
     <!--    useful things-->
     <string name="all_notes">All Notes</string>
-
 
 
     <!--    Ids-->

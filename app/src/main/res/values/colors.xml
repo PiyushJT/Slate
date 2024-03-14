@@ -11,7 +11,17 @@
     <color name="whiteLightest">#BBBBBB</color>
     <color name="whiteTransparent">#99FFFFFF</color>
 
+
+    <!--    Theme Colors-->
+    <color name="themeColor25">#6f2711</color>
+    <color name="themeColor35">#9b3617</color>
+    <color name="themeColor55">#e15f37</color>
+    <color name="themeColor60">#e4714e</color>
     <color name="themeColor">#E77E5F</color>
+    <color name="themeColor70">#eb947a</color>
+    <color name="themeColor85">#f5cabc</color>
+
+
     <color name="red">#f00</color>
     <color name="orange">#ff5e00</color>
     <color name="lime">#0f0</color>
