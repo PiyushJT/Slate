@@ -20,8 +20,9 @@
     <string name="all_notes">All Notes</string>
 
 
-    <!--    Ids-->
+    <!--    Urls-->
     <string name="client_id">558370176302-qq8vbfvuosgsnvak1e84mp41t6v0egb7.apps.googleusercontent.com</string>
+    <string name="database_url">https://slate-ae34b-default-rtdb.asia-southeast1.firebasedatabase.app/</string>
 
 
 

@@ -7,6 +7,7 @@ import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import androidx.core.text.trimmedLength
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -15,6 +16,10 @@ import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.auth.auth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.database
 import com.piyushjt.slate.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -122,24 +127,30 @@ class MainActivity : AppCompatActivity() {
             Utils.changeVisibility(loginInfoUI, true)
             Utils.changeVisibility(newNoteInfoUI, false)
 
-
+        }
 
         // If user has logged in
-        }
         else {
 
-            // setting username   --> needs to be changed to realtime database (upload)
-            var name = email.substringBefore('@')
+            // Initializing Realtime Database
+            val database = Firebase.database(getString(R.string.database_url))
+            val userID = auth.currentUser?.uid
+            val usernameRef = database.getReference(userID.toString()).child("username")
 
-            name =
-                if (name.length > 12) {
-                    name.subSequence(0, 12).toString()
-                } else {
-                    name
+
+
+            // changing username
+            usernameRef.addValueEventListener(object : ValueEventListener {
+                override fun onDataChange(dataSnapshot: DataSnapshot) {
+                    val uName = dataSnapshot.getValue(String::class.java).toString()
+
+                    binding.loginDetail.text = uName
+
                 }
 
+                override fun onCancelled(error: DatabaseError) {}
+            })
 
-            binding.loginDetail.text = name
 
 
             Utils.changeVisibility(newNoteInfoUI, true)
@@ -166,13 +177,54 @@ class MainActivity : AppCompatActivity() {
             auth.signInWithCredential(credential)
                 .addOnCompleteListener {
                     if (it.isSuccessful) {
+
+
+                        // Getting user's Email
+                        val email = auth.currentUser?.email
+
+
+                        // Initializing Realtime Database
+                        val database = Firebase.database(getString(R.string.database_url))
+                        val userID = auth.currentUser?.uid
+                        val usernameRef = database.getReference(userID.toString())
+                            .child("username")
+
+
+
+                        // Getting username from database and updating in Main Activity
+                        usernameRef.addValueEventListener(object : ValueEventListener {
+                            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                                val uName = dataSnapshot.getValue(String::class.java).toString()
+
+
+                                // If username is not available  -> create username from email
+                                if (uName == "null") {
+                                    var name = email?.substringBefore('@').toString()
+
+
+                                    name =
+                                        if (name.length > 12) {
+                                            name.subSequence(0, 12).toString()
+                                        } else {
+                                            name
+                                        }
+
+
+
+                                    // Uploading username to database
+                                    usernameRef.setValue(name)
+
+                                }
+
+                            }
+
+
+                            override fun onCancelled(error: DatabaseError) {}
+                        })
+
                         changeUI()
                     }
                 }
-
-
-        } else {
-            Toast.makeText(this, "Login Failed", Toast.LENGTH_SHORT).show()
         }
     }
 

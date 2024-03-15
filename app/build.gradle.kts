@@ -52,11 +52,15 @@ dependencies {
     androidTestImplementation(libs.androidx.espresso.core)
 
     // Firebase
+    //noinspection UseTomlInstead
     implementation(platform("com.google.firebase:firebase-bom:32.7.4"))
     //noinspection UseTomlInstead
     implementation("com.google.firebase:firebase-auth")
     implementation(libs.firebase.auth)
     implementation(libs.play.services.auth)
+    //noinspection UseTomlInstead
+    implementation("com.google.firebase:firebase-database")
+
 
 
     //noinspection UseTomlInstead
