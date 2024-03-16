@@ -5,9 +5,10 @@
     <string name="app_name">Slate</string>
     <string name="login">login</string>
     <string name="log_out">Log Out</string>
+    <string name="conf_log_out">Confirm Log Out</string>
     <string name="username">Username</string>
-    <string name="your_acc">Your Account</string>
     <string name="save">Save</string>
+    <string name="cancel">Cancel</string>
 
 
     <!--    Useless things but useful things-->
@@ -18,6 +19,9 @@
 
     <!--    useful things-->
     <string name="all_notes">All Notes</string>
+    <string name="your_acc">Your Account</string>
+    <string name="username_rule">*Username should not exceed 12 characters</string>
+    <string name="you_sure">Are you sure about that?</string>
 
 
     <!--    Urls-->

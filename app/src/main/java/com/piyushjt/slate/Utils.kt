@@ -1,11 +1,16 @@
 package com.piyushjt.slate
 
+import android.content.Context
+import android.os.VibrationEffect
+import android.os.Vibrator
 import android.view.View
+import android.widget.Toast
+import com.google.firebase.database.DatabaseReference
 
 object Utils {
 
 
-    // Function to change visibility of views
+    // Change visibility of views
     fun changeVisibility(views: List<View>, makeVisible: Boolean){
         if (makeVisible){
             for (view in views){
@@ -18,5 +23,17 @@ object Utils {
             }
         }
     }
+
+
+
+    // Vibration haptics
+    fun haptic(context: Context){
+        val vibrator = context.getSystemService(Vibrator::class.java)
+
+        vibrator.vibrate(VibrationEffect.createOneShot(40, 90))
+
+    }
+
+
 
 }

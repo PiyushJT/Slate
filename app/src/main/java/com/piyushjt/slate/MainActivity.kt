@@ -3,11 +3,9 @@ package com.piyushjt.slate
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
-import androidx.core.text.trimmedLength
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -36,7 +34,6 @@ class MainActivity : AppCompatActivity() {
 
 
         // Splash screen
-        Thread.sleep(1000)
         installSplashScreen()
 
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -50,8 +47,8 @@ class MainActivity : AppCompatActivity() {
         // googleSignInOption (gso)
         val gso = GoogleSignInOptions.Builder(
             GoogleSignInOptions
-                .DEFAULT_SIGN_IN
-        ).requestIdToken(getString(R.string.client_id))
+                .DEFAULT_SIGN_IN)
+            .requestIdToken(getString(R.string.client_id))
             .requestEmail().build()
 
         googleSignInClient = GoogleSignIn.getClient(this, gso)
@@ -62,7 +59,7 @@ class MainActivity : AppCompatActivity() {
         binding.loginDetail.setOnClickListener {
 
             // getting sign up info for UI
-            var userLoginDetails = binding.loginDetail.text.toString()
+            val userLoginDetails = binding.loginDetail.text.toString()
 
 
 
@@ -202,12 +199,10 @@ class MainActivity : AppCompatActivity() {
                                     var name = email?.substringBefore('@').toString()
 
 
-                                    name =
-                                        if (name.length > 12) {
-                                            name.subSequence(0, 12).toString()
-                                        } else {
-                                            name
-                                        }
+                                    name = when {
+                                        name.length > 11 -> name.subSequence(0, 11).toString()
+                                        else -> name
+                                    }
 
 
 
