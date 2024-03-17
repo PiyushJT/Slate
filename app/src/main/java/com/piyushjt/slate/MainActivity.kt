@@ -40,6 +40,12 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
 
+        binding.addNoteBtn.setOnClickListener {
+            startActivity(Intent(this, Note::class.java))
+        }
+
+
+
         // authentication
         auth = Firebase.auth
 
