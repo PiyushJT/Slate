@@ -4,8 +4,6 @@ import android.content.Context
 import android.os.VibrationEffect
 import android.os.Vibrator
 import android.view.View
-import android.widget.Toast
-import com.google.firebase.database.DatabaseReference
 
 object Utils {
 

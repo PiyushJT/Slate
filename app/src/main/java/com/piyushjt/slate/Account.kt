@@ -91,8 +91,8 @@ class Account : AppCompatActivity() {
 
             usernameRef.setValue(username)
                 .addOnSuccessListener {
-                    Toast.makeText(this, "Successfully changed username", Toast.LENGTH_SHORT)
-                        .show()
+                    Toast.makeText(this, getString(R.string.succ_chnged_usrnm),
+                        Toast.LENGTH_SHORT).show()
                 }
 
 

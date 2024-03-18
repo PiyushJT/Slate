@@ -9,6 +9,8 @@
     <string name="username">Username</string>
     <string name="save">Save</string>
     <string name="cancel">Cancel</string>
+    <string name="note_here">Your note here…</string>
+    <string name="title">Title</string>
 
 
     <!--    Useless things but useful things-->
@@ -22,6 +24,11 @@
     <string name="your_acc">Your Account</string>
     <string name="username_rule">*Username should not exceed 12 characters</string>
     <string name="you_sure">Are you sure about that?</string>
+
+
+    <!--    Toasts-->
+    <string name="succ_chnged_usrnm">Successfully changed username</string>
+    <string name="fild_cnnt_empty">Both fields cannot be empty</string>
 
 
     <!--    Urls-->

@@ -40,6 +40,19 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
 
+            <!--   Delete button   -->
+            <androidx.appcompat.widget.AppCompatImageButton
+                android:id="@+id/deleteNoteBtn"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_marginEnd="8dp"
+                android:backgroundTint="@color/transparent"
+                android:src="@drawable/delete"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
             <!--   Line   -->
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardView2"
@@ -63,8 +76,9 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/header"
-        tools:layout_editor_absoluteX="1dp">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/header">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -75,13 +89,13 @@
 
             <!--   Note Title   -->
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/textInputEditText"
+                android:id="@+id/noteTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:background="@color/transparent"
                 android:fontFamily="@font/outfit"
-                android:hint="Title"
+                android:hint="@string/title"
                 android:paddingStart="24dp"
                 android:paddingEnd="24dp"
                 android:textColor="@color/white"
@@ -96,14 +110,14 @@
 
             <!--   Note   -->
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/textInputEditText2"
+                android:id="@+id/note"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:background="@color/transparent"
                 android:fontFamily="@font/outfit"
-                android:hint="Your note here..."
-                android:paddingBottom="250dp"
+                android:hint="@string/note_here"
+                android:paddingBottom="200dp"
                 android:paddingStart="24dp"
                 android:paddingEnd="24dp"
                 android:textColor="@color/white"
@@ -111,10 +125,23 @@
                 android:textSize="18dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textInputEditText" />
+                app:layout_constraintTop_toBottomOf="@+id/noteTitle" />
 
 
-
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/saveNoteBtn"
+                android:layout_width="240dp"
+                android:layout_height="60dp"
+                android:backgroundTint="@color/themeColor70"
+                android:fontFamily="@font/nova_square"
+                android:text="@string/save"
+                android:textColor="@color/black"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                app:cornerRadius="15dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/note" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
