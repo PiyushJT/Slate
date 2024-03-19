@@ -3,9 +3,12 @@ package com.piyushjt.slate
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -27,6 +30,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var auth: FirebaseAuth
     private lateinit var googleSignInClient: GoogleSignInClient
+    private lateinit var recyclerView: RecyclerView
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -97,10 +101,69 @@ class MainActivity : AppCompatActivity() {
     }
 
 
+    // Function to load recycler view
+    private fun loadNotesRV(){
+
+
+        // Creating recycler view
+        recyclerView = binding.notesRV
+        recyclerView.layoutManager = LinearLayoutManager(this)
+
+
+
+        // Initializing Realtime Database
+        val currentUser = auth.currentUser
+        val database = Firebase.database(getString(R.string.database_url))
+        val userID = auth.currentUser?.uid
+
+
+
+        currentUser?.let { user ->
+
+
+            // Initializing note reference
+            val noteRef = database.getReference(userID.toString()).child("allNotes")
+
+            noteRef.addValueEventListener(object : ValueEventListener {
+
+                override fun onDataChange(snapshot: DataSnapshot) {
+
+
+                    // Initializing list of all notes
+                    val noteList = mutableListOf<NoteItem>()
+
+
+                    // Adding notes to note list
+                    for (noteSnapshot in snapshot.children) {
+
+                        val note = noteSnapshot.getValue(NoteItem::class.java)
+                        note?.let {
+                            noteList.add(it)
+                        }
+
+                    }
+                    noteList.reverse()
+
+
+                    // Adapter for recycler view
+                    val adapter = NoteAdapter(noteList, this@MainActivity)
+                    recyclerView.adapter = adapter
+
+                }
+
+                override fun onCancelled(error: DatabaseError) {}
+            })
+        }
+
+
+    }
+
+
 
     // Function to change UI on basis of login
     private fun changeUI() {
 
+        loadNotesRV()
 
 
         // Defining Views
@@ -116,7 +179,11 @@ class MainActivity : AppCompatActivity() {
             binding.imageView3,
             binding.addNoteBtn
         )
-
+        val notesRVUI = listOf(
+            binding.textView,
+            binding.notesRV,
+            binding.addNoteBtn
+        )
 
 
         val email = auth.currentUser?.email
@@ -129,6 +196,7 @@ class MainActivity : AppCompatActivity() {
 
             Utils.changeVisibility(loginInfoUI, true)
             Utils.changeVisibility(newNoteInfoUI, false)
+            Utils.changeVisibility(notesRVUI, false)
 
         }
 
@@ -156,8 +224,38 @@ class MainActivity : AppCompatActivity() {
 
 
 
-            Utils.changeVisibility(newNoteInfoUI, true)
             Utils.changeVisibility(loginInfoUI, false)
+
+
+            // Reading no. of notes
+            val noteRef = database.getReference(userID.toString()).child("allNotes")
+
+            noteRef.addValueEventListener(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+
+                    // no. of notes
+                    val noteCount = snapshot.childrenCount.toDouble()
+
+
+                    // Showing RV if notes are there
+                    if (noteCount != 0.0) {
+
+                        Utils.changeVisibility(newNoteInfoUI, false)
+                        Utils.changeVisibility(notesRVUI, true)
+
+                    }
+
+                    // Showing add note tutorial if notes are not there
+                    else{
+
+                        Utils.changeVisibility(newNoteInfoUI, true)
+                    }
+
+                }
+
+                override fun onCancelled(error: DatabaseError) {}
+            })
+
 
         }
 
