@@ -1,12 +1,18 @@
 package com.piyushjt.slate
 
+import android.app.Dialog
 import android.content.Context
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.VibrationEffect
 import android.os.Vibrator
 import android.text.Editable
 import android.text.InputFilter
 import android.text.TextWatcher
+import android.util.Log
 import android.view.View
+import android.view.Window
+import android.widget.Button
 import android.widget.TextView
 
 object Utils {
@@ -35,6 +41,7 @@ object Utils {
 
         vibrator.vibrate(VibrationEffect.createOneShot(40, 90))
 
+        Log.d("TAG", "Haptic delivered") // For testing in emulator
     }
 
 
@@ -67,6 +74,49 @@ object Utils {
         })
     }
 
+
+    // Showing alert dialog box
+    fun showDialog(context: Context, head: String, posBtnTxt: String, posFun: () -> Unit) {
+
+        haptic(context)
+
+
+
+        // Generating dialog box
+        val dialog = Dialog(context)
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.setCancelable(true)
+        dialog.setContentView(R.layout.alert_dialog)
+        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+
+
+        // Defining views of the dialog
+        val dialogTitle : TextView = dialog.findViewById(R.id.dialogTitle)
+        val posBtn : Button = dialog.findViewById(R.id.posBtn)
+        val cancelBtn : Button = dialog.findViewById(R.id.cancelBtn)
+
+
+        // setting values of dialog box
+        dialogTitle.text = head
+        posBtn.text = posBtnTxt
+
+
+
+        // cancel button
+        cancelBtn.setOnClickListener {
+            dialog.dismiss()
+        }
+
+
+        // positive button
+        posBtn.setOnClickListener {
+            posFun()
+            dialog.dismiss()
+        }
+
+        dialog.show()
+
+    }
 
 
 }

@@ -29,10 +29,6 @@ class Note : AppCompatActivity() {
         // Limiting length of note Title
         Utils.textLimiter(binding.noteTitle, binding.noteTitleRule, 100)
 
-        binding.note.setOnClickListener {
-            binding.noteTitleRule.visibility = View.INVISIBLE
-        }
-
 
 
         // Getting data about the note
@@ -46,6 +42,26 @@ class Note : AppCompatActivity() {
         binding.noteTitle.setText(noteTitle)
         binding.note.setText(note)
 
+
+
+        // Deleting the note
+        binding.deleteNoteBtn.setOnClickListener {
+
+            // If note is saved
+            if (noteID != "null"){
+
+                val head = getString(R.string.conf_delete)
+                val deleteTxt = getString(R.string.delete)
+
+                Utils.showDialog(this, head, deleteTxt) { deleteNote(noteID) }
+            }
+
+            // If note is not saved
+            else {
+                finish()
+            }
+
+        }
 
 
 
@@ -141,5 +157,21 @@ class Note : AppCompatActivity() {
 
     }
 
+
+
+    private fun deleteNote(noteID: String){
+
+        // Initializing Realtime Database
+        val database = Firebase.database(getString(R.string.database_url))
+        val userID = auth.currentUser?.uid
+        val noteRef = database.getReference(userID.toString())
+            .child("allNotes").child(noteID)
+
+
+        // Deleting the note
+        noteRef.removeValue()
+        finish()
+
+    }
 
 }

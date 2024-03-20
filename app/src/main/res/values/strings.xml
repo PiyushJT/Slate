@@ -6,6 +6,8 @@
     <string name="login">login</string>
     <string name="log_out">Log Out</string>
     <string name="conf_log_out">Confirm Log Out</string>
+    <string name="delete">Delete</string>
+    <string name="conf_delete">Confirm Delete</string>
     <string name="username">Username</string>
     <string name="save">Save</string>
     <string name="cancel">Cancel</string>

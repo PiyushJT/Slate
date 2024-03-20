@@ -1,12 +1,6 @@
 package com.piyushjt.slate
 
-import android.app.Dialog
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.view.Window
-import android.widget.Button
-import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.Firebase
@@ -47,8 +41,11 @@ class Account : AppCompatActivity() {
         // Log out
         binding.logOutBtn.setOnClickListener {
 
-            Utils.haptic(this)
-            showDialog() // Alert Dialog
+            // Confirming log Out by dialog box
+            val head = getString(R.string.conf_log_out)
+            val logOutTxt= getString(R.string.log_out)
+
+            Utils.showDialog(this, head, logOutTxt) { logOut() }
 
         }
 
@@ -83,54 +80,11 @@ class Account : AppCompatActivity() {
 
 
 
-    // Showing alert dialog box
-    private fun showDialog() {
-
-
-        // Getting some strings for alert box
-        val head = getString(R.string.conf_log_out)
-        val posBtnTxt = getString(R.string.log_out)
-
-
-
-        // Generating dialog box
-        val dialog = Dialog(this)
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
-        dialog.setCancelable(true)
-        dialog.setContentView(R.layout.alert_dialog)
-        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-
-
-        // Defining views of the dialog
-        val dialogTitle : TextView = dialog.findViewById(R.id.dialogTitle)
-        val posBtn : Button = dialog.findViewById(R.id.posBtn)
-        val cancelBtn : Button = dialog.findViewById(R.id.cancelBtn)
-
-
-        // setting values of dialog box
-        dialogTitle.text = head
-        posBtn.text = posBtnTxt
-
-
-
-        // cancelling log out
-        cancelBtn.setOnClickListener {
-            dialog.dismiss()
-        }
-
-
-        // Log out
-        posBtn.setOnClickListener {
-            auth.signOut()
-            finish()
-        }
-
-
-        dialog.show()
-
-
+    // Function to log out
+    private fun logOut(){
+        auth.signOut()
+        finish()
     }
-
 
 
 }
