@@ -9,9 +9,17 @@ import com.piyushjt.slate.databinding.NotesItemBinding
 
 class NoteAdapter(
     private val notes: List<NoteItem>,
-    mainActivity: MainActivity
+    private val itemClickListener: OnItemClickListener
 ) :
     RecyclerView.Adapter<NoteAdapter.NoteViewHolder>() {
+
+    interface OnItemClickListener {
+
+        // Initializing function to set click listener
+        fun onClick(noteTitle: String, note: String, noteKey: String)
+
+    }
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NoteViewHolder {
 
@@ -25,6 +33,14 @@ class NoteAdapter(
     override fun onBindViewHolder(holder: NoteViewHolder, position: Int) {
         val note = notes[position]
         holder.bind(note)
+
+
+        // Click listener on a note
+        holder.binding.background.setOnClickListener{
+
+            itemClickListener.onClick(note.noteTitle, note.note, note.noteKey)
+
+        }
 
     }
 
@@ -40,11 +56,11 @@ class NoteAdapter(
 
             // Setting random bg colors for notes
             val colors = mapOf(
-                1 to "#FF9E9E",
-                2 to "#91F48F",
-                3 to "#FFF599",
-                4 to "#9EFFFF",
-                5 to "#B69CFF"
+                1 to "#FF9E9E", // Pink
+                2 to "#91F48F", // Green
+                3 to "#FFF599", // Yellow
+                4 to "#9EFFFF", // Aqua
+                5 to "#B69CFF"  // Purple
             )
 
             val randomInt = (1..5).random()

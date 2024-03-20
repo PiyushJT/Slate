@@ -3,7 +3,6 @@ package com.piyushjt.slate
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
@@ -23,7 +22,7 @@ import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.database
 import com.piyushjt.slate.databinding.ActivityMainBinding
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), NoteAdapter.OnItemClickListener {
 
 
     // LateInit
@@ -155,6 +154,25 @@ class MainActivity : AppCompatActivity() {
             })
         }
 
+
+    }
+
+
+    // Function to open a note
+    override fun onClick(noteTitle: String, note: String, noteKey: String) {
+
+
+        // Initializing note activity
+        val noteActivity = Intent(this, Note::class.java)
+
+
+        // Providing data to note Activity
+        noteActivity.putExtra("title", noteTitle)
+            .putExtra("note", note)
+            .putExtra("noteId", noteKey)
+
+
+        startActivity(noteActivity)
 
     }
 

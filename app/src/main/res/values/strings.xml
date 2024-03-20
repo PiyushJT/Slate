@@ -23,11 +23,13 @@
     <string name="all_notes">All Notes</string>
     <string name="your_acc">Your Account</string>
     <string name="username_rule">*Username should not exceed 12 characters</string>
+    <string name="note_title_rule">*Title should not exceed 100 characters</string>
     <string name="you_sure">Are you sure about that?</string>
 
 
     <!--    Toasts-->
     <string name="succ_chnged_usrnm">Successfully changed username</string>
+    <string name="succ_updtd_note">Successfully updated note</string>
     <string name="fild_cnnt_empty">Both fields cannot be empty</string>
 
 

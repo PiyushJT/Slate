@@ -106,6 +106,23 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
 
+            <!--   Note Title rule < 100   -->
+            <TextView
+                android:id="@+id/noteTitleRule"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:text="@string/note_title_rule"
+                android:visibility="invisible"
+                android:textColor="@color/red"
+                android:textSize="14dp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@+id/noteTitle"
+                app:layout_constraintTop_toBottomOf="@+id/noteTitle" />
+
+
+
 
 
             <!--   Note   -->
@@ -113,19 +130,19 @@
                 android:id="@+id/note"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="8dp"
                 android:background="@color/transparent"
                 android:fontFamily="@font/outfit"
                 android:hint="@string/note_here"
-                android:paddingBottom="200dp"
                 android:paddingStart="24dp"
                 android:paddingEnd="24dp"
+                android:paddingBottom="200dp"
                 android:textColor="@color/white"
                 android:textColorHint="@color/whiteLightest"
                 android:textSize="18dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/noteTitle" />
+                app:layout_constraintTop_toBottomOf="@+id/noteTitleRule" />
 
 
             <com.google.android.material.button.MaterialButton

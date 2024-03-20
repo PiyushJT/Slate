@@ -4,10 +4,6 @@ import android.app.Dialog
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.text.Editable
-import android.text.InputFilter
-import android.text.TextWatcher
-import android.view.View
 import android.view.Window
 import android.widget.Button
 import android.widget.TextView
@@ -44,23 +40,7 @@ class Account : AppCompatActivity() {
 
 
         // Limiting length of username
-        val usernameEditText = binding.username
-        val filters = arrayOf<InputFilter>(InputFilter.LengthFilter(12))
-        usernameEditText.filters = filters
-
-
-
-        // Changing visibility of Username rule ( < 13 )
-        usernameEditText.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-            override fun afterTextChanged(s: Editable?) {}
-
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                if (s != null && s.length == 12) {
-                    binding.usernameRule.visibility = View.VISIBLE
-                }
-            }
-        })
+        Utils.textLimiter(binding.username, binding.usernameRule, 12)
 
 
 
