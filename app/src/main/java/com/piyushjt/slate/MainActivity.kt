@@ -73,7 +73,7 @@ class MainActivity : AppCompatActivity(), NoteAdapter.OnItemClickListener {
 
 
             // Open Login view or Account activity
-            if (userLoginDetails == "login") {
+            if (userLoginDetails in listOf("login", "लॉगिन", "લોગિન")) {
 
                 val signInClient = googleSignInClient.signInIntent
                 launcher.launch(signInClient)
@@ -117,7 +117,7 @@ class MainActivity : AppCompatActivity(), NoteAdapter.OnItemClickListener {
 
 
 
-        currentUser?.let { user ->
+        currentUser?.let {
 
 
             // Initializing note reference

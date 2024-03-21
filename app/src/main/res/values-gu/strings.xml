@@ -1,0 +1,39 @@
+<resources>
+
+
+    <!--    App Constants-->
+    <string name="app_name">સ્લેટ</string>
+    <string name="login">લોગિન</string>
+    <string name="log_out">લોગ આઉટ</string>
+    <string name="conf_log_out">લોગ આઉટની પુષ્ટિ કરો</string>
+    <string name="delete">કાઢી નાખો</string>
+    <string name="conf_delete">કાઢી નાખવાની પુષ્ટિ કરો</string>
+    <string name="username">વપરાશકર્તા નામ</string>
+    <string name="save">સાચવો</string>
+    <string name="cancel">રદ કરો</string>
+    <string name="note_here">તમારી નોંધ અહીં...</string>
+    <string name="title">શીર્ષક</string>
+
+
+    <!--    Useless things but useful things-->
+    <string name="start_journey">તમારી જર્ની શરૂ કરો</string>
+    <string name="log_in_sign_up">લૉગ ઇન / તમારા એકાઉન્ટમાં સાઇન અપ કરો.</string>
+    <string name="useless_thought_1">તમારા પ્રથમ વિચારને લખો.</string>
+
+
+    <!--    useful things-->
+    <string name="all_notes">બધી નોંધો</string>
+    <string name="your_acc">તમારું એકાઉન્ટ</string>
+    <string name="username_rule">*વપરાશકર્તા નામ 12 અક્ષરોથી વધુ ન હોવું જોઈએ</string>
+    <string name="note_title_rule">*શીર્ષક 100 અક્ષરોથી વધુ ન હોવું જોઈએ</string>
+    <string name="you_sure">શું તમે તેના વિશે ચોક્કસ છો?</string>
+
+
+    <!--    Toasts-->
+    <string name="succ_chnged_usrnm">સફળતાપૂર્વક વપરાશકર્તાનામ બદલ્યું</string>
+    <string name="succ_updtd_note">નોંધ સફળતાપૂર્વક અપડેટ કરી</string>
+    <string name="fild_cnnt_empty">બંને ફીલ્ડ ખાલી હોઈ શકતા નથી</string>
+    <string name="invld_usnrm">અમાન્ય વપરાશ કર્તા નામ</string>
+
+
+</resources>

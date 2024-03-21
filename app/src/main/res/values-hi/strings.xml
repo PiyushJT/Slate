@@ -1,0 +1,39 @@
+<resources>
+
+
+    <!--    App Constants-->
+    <string name="app_name">स्लेट</string>
+    <string name="login">लॉगिन</string>
+    <string name="log_out">लॉग आउट</string>
+    <string name="conf_log_out">लॉग आउट की पुष्टि करें</string>
+    <string name="delete">हटाएं</string>
+    <string name="conf_delete">हटाने की पुष्टि करें</string>
+    <string name="username">उपयोगकर्ता नाम</string>
+    <string name="save">सहेजें</string>
+    <string name="cancel">रद्द करें</string>
+    <string name="note_here">आपका नोट यहां...</string>
+    <string name="title">शीर्षक</string>
+
+
+    <!--    Useless things but useful things-->
+    <string name="start_journey">अपनी यात्रा शुरू करें</string>
+    <string name="log_in_sign_up">लॉग इन करें / अपने खाते में साइन अप करें</string>
+    <string name="useless_thought_1">अपना पहला विचार लिखें और आगे बढ़ें</string>
+
+
+    <!--    useful things-->
+    <string name="all_notes">सभी नोट्स</string>
+    <string name="your_acc">आपका खाता</string>
+    <string name="username_rule">*उपयोगकर्ता नाम 12 अक्षरों से अधिक नहीं होना चाहिए</string>
+    <string name="note_title_rule">*शीर्षक 100 अक्षरों से अधिक नहीं होना चाहिए</string>
+    <string name="you_sure">क्या आप इसके बारे में निश्चित हैं?</string>
+
+
+    <!--    Toasts-->
+    <string name="succ_chnged_usrnm">सफलतापूर्वक बदला गया उपयोक्तानाम</string>
+    <string name="succ_updtd_note">नोट सफलतापूर्वक अपडेट किया गया</string>
+    <string name="fild_cnnt_empty">दोनों फ़ील्ड खाली नहीं हो सकते</string>
+    <string name="invld_usnrm">अमान्य उपयोगकर्ता नाम</string>
+
+
+</resources>

@@ -66,13 +66,20 @@ class Account : AppCompatActivity() {
             val username = binding.username.text.toString()
 
 
-            usernameRef.setValue(username)
-                .addOnSuccessListener {
-                    Toast.makeText(this, getString(R.string.succ_chnged_usrnm),
-                        Toast.LENGTH_SHORT).show()
-                }
+            // If the user tries to be over smart
+            if(username in listOf("login", "लॉगिन", "લોગિન")){
+                Toast.makeText(this, getString(R.string.invld_usnrm), Toast.LENGTH_LONG).show()
+            }
 
-
+            else {
+                usernameRef.setValue(username)
+                    .addOnSuccessListener {
+                        Toast.makeText(
+                            this, getString(R.string.succ_chnged_usrnm),
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+            }
 
         }
 
