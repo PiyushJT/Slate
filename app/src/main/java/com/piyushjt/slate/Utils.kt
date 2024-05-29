@@ -2,6 +2,7 @@ package com.piyushjt.slate
 
 import android.app.Dialog
 import android.content.Context
+import android.content.res.ColorStateList
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.VibrationEffect
@@ -36,10 +37,10 @@ object Utils {
 
 
     // Vibration haptics
-    fun haptic(context: Context){
+    fun haptic(context: Context) {
         val vibrator = context.getSystemService(Vibrator::class.java)
 
-        vibrator.vibrate(VibrationEffect.createOneShot(40, 90))
+        vibrator.vibrate(VibrationEffect.createOneShot(65, 90))
 
         Log.d("TAG", "Haptic delivered") // For testing in emulator
     }
@@ -47,7 +48,7 @@ object Utils {
 
 
     // Text Limiting
-    fun textLimiter(textView: TextView, ruleView: TextView, maxChar: Int){
+    fun textLimiter(textView: TextView, ruleView: TextView, maxChar: Int) {
 
 
         // Limiting length of username
@@ -66,13 +67,14 @@ object Utils {
 
                 if (s != null && s.length == maxChar) {
 
-                    ruleView.visibility= View.VISIBLE
+                    ruleView.visibility = View.VISIBLE
 
                 }
 
             }
         })
     }
+
 
 
     // Showing alert dialog box
@@ -115,6 +117,36 @@ object Utils {
         }
 
         dialog.show()
+
+    }
+
+
+
+    // Change background tint of views
+    fun changeBgTint(views: List<View>, color: String) {
+
+        for (view in views) {
+            view.setBackgroundTintList(
+                ColorStateList.valueOf(
+                    Color.parseColor(color)
+                )
+            )
+        }
+    }
+
+
+    // Generating random color
+    fun getRandomColor() : String {
+
+        val colors = mapOf(
+            1 to "#FF9E9E", // Pink
+            2 to "#91F48F", // Green
+            3 to "#FFF599", // Yellow
+            4 to "#9EFFFF", // Aqua
+            5 to "#B69CFF"  // Purple
+        )
+
+        return colors[(1..5).random()]!!
 
     }
 

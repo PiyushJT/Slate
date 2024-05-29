@@ -40,6 +40,22 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
 
+            <!--   Background change button   -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/colorBtn"
+                android:layout_width="80dp"
+                android:layout_height="50dp"
+                android:layout_marginEnd="32dp"
+                android:text="@string/bg"
+                android:textColor="@color/black"
+                android:backgroundTint="@color/themeColor70"
+                android:textSize="16dp"
+                app:cornerRadius="5dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/deleteNoteBtn"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
             <!--   Delete button   -->
             <androidx.appcompat.widget.AppCompatImageButton
                 android:id="@+id/deleteNoteBtn"

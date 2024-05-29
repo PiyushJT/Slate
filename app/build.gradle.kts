@@ -12,8 +12,8 @@ android {
         applicationId = "com.piyushjt.slate"
         minSdk = 29
         targetSdk = 34
-        versionCode = 1
-        versionName = "1.0"
+        versionCode = 2
+        versionName = "2.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -53,7 +53,7 @@ dependencies {
 
     // Firebase
     //noinspection UseTomlInstead
-    implementation(platform("com.google.firebase:firebase-bom:32.7.4"))
+    implementation(platform("com.google.firebase:firebase-bom:33.0.0"))
     //noinspection UseTomlInstead
     implementation("com.google.firebase:firebase-auth")
     implementation(libs.firebase.auth)

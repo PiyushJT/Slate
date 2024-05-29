@@ -159,17 +159,29 @@ class MainActivity : AppCompatActivity(), NoteAdapter.OnItemClickListener {
 
 
     // Function to open a note
-    override fun onClick(noteTitle: String, note: String, noteKey: String) {
+    override fun onClick(noteTitle: String, note: String, noteKey: String, noteColorTemp: String) {
 
 
         // Initializing note activity
         val noteActivity = Intent(this, Note::class.java)
 
 
+        // Getting note color
+        var noteColor = Utils.getRandomColor()
+
+        if (noteColorTemp.isNotBlank()) {
+            noteColor = noteColorTemp
+        }
+        else {
+            updateColor(noteKey, noteColor)
+        }
+
+
         // Providing data to note Activity
         noteActivity.putExtra("title", noteTitle)
             .putExtra("note", note)
             .putExtra("noteId", noteKey)
+            .putExtra("noteColor", noteColor)
 
 
         startActivity(noteActivity)
@@ -345,5 +357,19 @@ class MainActivity : AppCompatActivity(), NoteAdapter.OnItemClickListener {
         }
     }
 
+    // Function to update note color
+    private fun updateColor(noteID: String, noteColor: String){
+
+        // Initializing Realtime Database
+        val database = Firebase.database(getString(R.string.database_url))
+        val userID = auth.currentUser?.uid
+        val noteRef = database.getReference(userID.toString())
+            .child("allNotes").child(noteID).child("noteColor")
+
+
+        // Updating the note color
+        noteRef.setValue(noteColor)
+
+    }
 
 }

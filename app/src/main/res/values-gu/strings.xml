@@ -19,6 +19,8 @@
     <string name="start_journey">તમારી જર્ની શરૂ કરો</string>
     <string name="log_in_sign_up">લૉગ ઇન / તમારા એકાઉન્ટમાં સાઇન અપ કરો.</string>
     <string name="useless_thought_1">તમારા પ્રથમ વિચારને લખો.</string>
+    <string name="bg">રંગ</string>
+    <string name="select_bg_color">બેકગ્રાઉન્ડ કલર પસંદ કરો</string>
 
 
     <!--    useful things-->

@@ -22,12 +22,20 @@
     <color name="themeColor85">#f5cabc</color>
 
 
+    <!--    Common Colors-->
     <color name="red">#f00</color>
     <color name="orange">#ff5e00</color>
     <color name="lime">#0f0</color>
     <color name="yellow">#FFD500</color>
     <color name="transparent">#00000000</color>
 
+
+    <!--    Note Colors-->
+    <color name="notePink">#FF9E9E</color>
+    <color name="noteGreen">#91F48F</color>
+    <color name="noteYellow">#FFF599</color>
+    <color name="noteAqua">#9EFFFF</color>
+    <color name="notePurple">#B69CFF</color>
 
 
 </resources>

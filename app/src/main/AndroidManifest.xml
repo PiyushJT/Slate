@@ -24,7 +24,9 @@
         <!--    Note Activity-->
         <activity
             android:name=".Note"
-            android:exported="false"/>
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.Slate.LightStatusBar" />
 
 
         <!--    Account Activity-->

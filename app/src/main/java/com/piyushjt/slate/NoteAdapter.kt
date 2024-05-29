@@ -16,7 +16,7 @@ class NoteAdapter(
     interface OnItemClickListener {
 
         // Initializing function to set click listener
-        fun onClick(noteTitle: String, note: String, noteKey: String)
+        fun onClick(noteTitle: String, note: String, noteKey: String, noteColor: String)
 
     }
 
@@ -38,7 +38,7 @@ class NoteAdapter(
         // Click listener on a note
         holder.binding.background.setOnClickListener{
 
-            itemClickListener.onClick(note.noteTitle, note.note, note.noteKey)
+            itemClickListener.onClick(note.noteTitle, note.note, note.noteKey, note.noteColor)
 
         }
 
@@ -55,21 +55,22 @@ class NoteAdapter(
 
 
             // Setting random bg colors for notes
-            val colors = mapOf(
-                1 to "#FF9E9E", // Pink
-                2 to "#91F48F", // Green
-                3 to "#FFF599", // Yellow
-                4 to "#9EFFFF", // Aqua
-                5 to "#B69CFF"  // Purple
-            )
+            if(note.noteColor.isEmpty()) {
 
-            val randomInt = (1..5).random()
-
-            binding.background.setBackgroundTintList(
-                ColorStateList.valueOf(
-                    Color.parseColor(colors[randomInt])
+                binding.background.setBackgroundTintList(
+                    ColorStateList.valueOf(
+                        Color.parseColor(Utils.getRandomColor())
+                    )
                 )
-            )
+            }
+            // Setting bg colors for notes
+            else {
+                binding.background.setBackgroundTintList(
+                    ColorStateList.valueOf(
+                        Color.parseColor(note.noteColor)
+                    )
+                )
+            }
 
 
 
@@ -80,8 +81,13 @@ class NoteAdapter(
 
             } else {
 
-                binding.noteTitleHm.text = note.note
-
+                // Showing first 90 characters of note
+                val noteText = if (note.note.length > 90) {
+                    note.note.substring(0, 97) + "..."
+                } else {
+                    note.note
+                }
+                binding.noteTitleHm.text = noteText
             }
 
 
