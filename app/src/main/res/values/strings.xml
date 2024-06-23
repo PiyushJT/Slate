@@ -33,8 +33,6 @@
 
     <!--    Toasts-->
     <string name="succ_chnged_usrnm">Successfully changed username</string>
-    <string name="succ_updtd_note">Successfully updated note</string>
-    <string name="fild_cnnt_empty">Both fields cannot be empty</string>
     <string name="invld_usnrm">Invalid Username</string>
 
 

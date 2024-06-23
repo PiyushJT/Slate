@@ -50,6 +50,10 @@ class Account : AppCompatActivity() {
         }
 
 
+        // Back Button
+        binding.backBtn.setOnClickListener {
+            finish()
+        }
 
 
         // Changing Username on Save Button

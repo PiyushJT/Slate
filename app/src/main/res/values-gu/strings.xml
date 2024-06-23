@@ -33,8 +33,6 @@
 
     <!--    Toasts-->
     <string name="succ_chnged_usrnm">સફળતાપૂર્વક વપરાશકર્તાનામ બદલ્યું</string>
-    <string name="succ_updtd_note">નોંધ સફળતાપૂર્વક અપડેટ કરી</string>
-    <string name="fild_cnnt_empty">બંને ફીલ્ડ ખાલી હોઈ શકતા નથી</string>
     <string name="invld_usnrm">અમાન્ય વપરાશ કર્તા નામ</string>
 
 

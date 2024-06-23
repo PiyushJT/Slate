@@ -25,18 +25,31 @@
             android:layout_height="match_parent">
 
 
+            <!--   Back button   -->
+            <androidx.appcompat.widget.AppCompatImageButton
+                android:id="@+id/backBtn"
+                android:layout_width="22dp"
+                android:layout_height="22dp"
+                android:layout_marginStart="16dp"
+                android:backgroundTint="@color/transparent"
+                android:src="@drawable/back"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
             <!--   App Name   -->
             <TextView
                 android:id="@+id/appName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
+                android:layout_marginStart="16dp"
                 android:fontFamily="@font/aclonica"
                 android:text="@string/app_name"
                 android:textColor="@color/themeColor"
                 android:textSize="24dp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/backBtn"
                 app:layout_constraintTop_toTopOf="parent" />
 
 
@@ -159,22 +172,6 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/noteTitleRule" />
-
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/saveNoteBtn"
-                android:layout_width="240dp"
-                android:layout_height="60dp"
-                android:backgroundTint="@color/themeColor70"
-                android:fontFamily="@font/nova_square"
-                android:text="@string/save"
-                android:textColor="@color/black"
-                android:textSize="20dp"
-                android:textStyle="bold"
-                app:cornerRadius="15dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/note" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

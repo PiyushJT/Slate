@@ -4,10 +4,11 @@ import android.app.Dialog
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.View
 import android.view.Window
 import android.widget.Button
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.google.firebase.Firebase
@@ -30,7 +31,7 @@ class Note : AppCompatActivity() {
 
 
         // Changing the theme color
-        val themeViews = listOf(binding.saveNoteBtn, binding.header, binding.colorBtn)
+        val themeViews = listOf(binding.header, binding.colorBtn)
 
 
         binding.colorBtn.setOnClickListener {
@@ -93,11 +94,15 @@ class Note : AppCompatActivity() {
         }
 
 
+        // Back Button
+        binding.backBtn.setOnClickListener {
+            finish()
+        }
+
 
         // Saving the note
-        binding.saveNoteBtn.setOnClickListener {
-            saveNote()
-        }
+        saveNoteOnTextChange()
+
     }
 
 
@@ -129,13 +134,6 @@ class Note : AppCompatActivity() {
 
 
         }
-        else {
-            Toast.makeText(
-                this, getString(R.string.fild_cnnt_empty),
-                Toast.LENGTH_LONG
-            ).show()
-        }
-
     }
 
 
@@ -185,12 +183,6 @@ class Note : AppCompatActivity() {
         val newNote = NoteItem(noteTitle, note, noteID, noteColor)
 
         noteRef.setValue(newNote)
-            .addOnSuccessListener {
-                Toast.makeText(
-                    this, getString(R.string.succ_updtd_note),
-                    Toast.LENGTH_SHORT
-                ).show()
-            }
 
     }
 
@@ -281,6 +273,25 @@ class Note : AppCompatActivity() {
             "#B69CFF" to R.color.notePurple
         )
         window.statusBarColor = ContextCompat.getColor(this, colors[noteColor]!!)
+    }
+
+
+
+    // Function to save the note on text change
+    private fun saveNoteOnTextChange(){
+
+        val textWatcher = object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+
+            override fun afterTextChanged(s: Editable?) {
+                saveNote()
+            }
+        }
+
+        binding.noteTitle.addTextChangedListener(textWatcher)
+        binding.note.addTextChangedListener(textWatcher)
     }
 
 
