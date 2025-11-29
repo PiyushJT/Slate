@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Slate - Keep Your Notes</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database-compat.js"></script>
+    <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-app.js";
+        // TODO: Add SDKs for Firebase products that you want to use
+        // https://firebase.google.com/docs/web/setup#available-libraries
+      
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+          apiKey: "AIzaSyBNcjHow6H6GGOYujKnp75PZlyT6LGzKso",
+          authDomain: "slate-ae34b-fa076.firebaseapp.com",
+          databaseURL: "https://slate-ae34b-default-rtdb.asia-southeast1.firebasedatabase.app",
+          projectId: "slate-ae34b",
+          storageBucket: "slate-ae34b.firebasestorage.app",
+          messagingSenderId: "558370176302",
+          appId: "1:558370176302:web:f1693957121dd870e44ebf"
+        };
+      
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+      </script>
+</head>
+<body>
+    <!-- Main Screen -->
+    <div id="main-screen" class="screen active">
+        <!-- Header -->
+        <header class="header">
+            <h1 class="app-name">Slate</h1>
+            <div id="login-detail" class="login-detail">login</div>
+        </header>
+
+        <!-- Login Info (shown when not logged in) -->
+        <div id="login-info" class="info-section">
+            <div class="info-card">
+                <h2 class="info-title">Start Your Journey</h2>
+                <p class="info-text">Log in / Sign up to your account.</p>
+            </div>
+        </div>
+
+        <!-- Add Note Info (shown when logged in but no notes) -->
+        <div id="add-note-info" class="info-section hidden">
+            <div class="info-card">
+                <h2 class="info-title">Start Your Journey</h2>
+                <p class="info-text">Dive in! Scribble your first thought and take the plunge.</p>
+            </div>
+        </div>
+
+        <!-- All Notes Section -->
+        <div id="notes-section" class="notes-section hidden">
+            <h2 class="all-notes-title">All Notes</h2>
+            <div id="notes-container" class="notes-container"></div>
+        </div>
+
+        <!-- Add Note Button -->
+        <button id="add-note-btn" class="add-note-btn hidden" title="Add Note">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="12" y1="5" x2="12" y2="19"></line>
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+            </svg>
+        </button>
+    </div>
+
+    <!-- Note Editor Screen -->
+    <div id="note-screen" class="screen">
+        <!-- Header -->
+        <header id="note-header" class="header">
+            <button id="back-btn" class="back-btn">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M19 12H5M12 19l-7-7 7-7"/>
+                </svg>
+            </button>
+            <h1 class="app-name">Slate</h1>
+            <div class="header-actions">
+                <button id="color-btn" class="color-btn">BG</button>
+                <button id="delete-note-btn" class="delete-btn" title="Delete Note">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="3 6 5 6 21 6"></polyline>
+                        <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                    </svg>
+                </button>
+            </div>
+        </header>
+
+        <!-- Note Editor -->
+        <div class="note-editor">
+            <input type="text" id="note-title" class="note-title" placeholder="Title" maxlength="100">
+            <div id="title-rule" class="title-rule hidden">*Title should not exceed 100 characters</div>
+            <textarea id="note-content" class="note-content" placeholder="Your note here…"></textarea>
+        </div>
+    </div>
+
+    <!-- Account Screen -->
+    <div id="account-screen" class="screen">
+        <!-- Header -->
+        <header class="header">
+            <button id="account-back-btn" class="back-btn">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M19 12H5M12 19l-7-7 7-7"/>
+                </svg>
+            </button>
+            <h1 class="app-name">Slate</h1>
+        </header>
+
+        <!-- Account Content -->
+        <div class="account-content">
+            <h2 class="account-title">Your Account</h2>
+            <div class="account-form">
+                <label for="username-input">Username</label>
+                <input type="text" id="username-input" class="username-input" maxlength="12" placeholder="Enter username">
+                <div id="username-rule" class="username-rule hidden">*Username should not exceed 12 characters</div>
+                <button id="save-username-btn" class="save-btn">Save</button>
+                <button id="logout-btn" class="logout-btn">Log Out</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Color Picker Modal -->
+    <div id="color-picker-modal" class="modal hidden">
+        <div class="modal-content">
+            <h3>Select Background Color</h3>
+            <div class="color-options">
+                <button class="color-option" data-color="#9EFFFF" style="background-color: #9EFFFF;"></button>
+                <button class="color-option" data-color="#FFF599" style="background-color: #FFF599;"></button>
+                <button class="color-option" data-color="#91F48F" style="background-color: #91F48F;"></button>
+                <button class="color-option" data-color="#B69CFF" style="background-color: #B69CFF;"></button>
+                <button class="color-option" data-color="#FF9E9E" style="background-color: #FF9E9E;"></button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Confirmation Modal -->
+    <div id="confirm-modal" class="modal hidden">
+        <div class="modal-content">
+            <h3 id="confirm-title"></h3>
+            <div class="modal-actions">
+                <button id="confirm-btn" class="confirm-btn"></button>
+                <button id="cancel-btn" class="cancel-btn">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast hidden"></div>
+
+    <script src="config.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
+

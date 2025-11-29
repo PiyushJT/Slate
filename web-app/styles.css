@@ -1,0 +1,551 @@
+/* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --black: #000000;
+    --white: #FFFFFF;
+    --theme-color: #FF6B35;
+    --theme-color-70: rgba(255, 107, 53, 0.7);
+    --white-lightest: rgba(255, 255, 255, 0.5);
+    --red: #FF0000;
+    --transparent: transparent;
+    
+    /* Note Colors */
+    --pink: #FF9E9E;
+    --green: #91F48F;
+    --yellow: #FFF599;
+    --aqua: #9EFFFF;
+    --purple: #B69CFF;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+    background-color: var(--black);
+    color: var(--white);
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+/* Screen Management */
+.screen {
+    display: none;
+    min-height: 100vh;
+    flex-direction: column;
+}
+
+.screen.active {
+    display: flex;
+}
+
+/* Header */
+.header {
+    background-color: var(--black);
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 24px;
+    border-bottom: 1px solid var(--white);
+    position: relative;
+}
+
+.app-name {
+    font-size: 24px;
+    color: var(--theme-color);
+    font-weight: bold;
+    font-family: 'Arial', sans-serif;
+}
+
+.login-detail {
+    font-size: 20px;
+    color: var(--white);
+    cursor: pointer;
+    user-select: none;
+    transition: opacity 0.2s;
+}
+
+.login-detail:hover {
+    opacity: 0.8;
+}
+
+.back-btn {
+    background: transparent;
+    border: none;
+    color: var(--white);
+    cursor: pointer;
+    padding: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 16px;
+    transition: opacity 0.2s;
+}
+
+.back-btn:hover {
+    opacity: 0.8;
+}
+
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.color-btn {
+    background-color: var(--theme-color-70);
+    color: var(--black);
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: opacity 0.2s;
+}
+
+.color-btn:hover {
+    opacity: 0.9;
+}
+
+.delete-btn {
+    background: transparent;
+    border: none;
+    color: var(--white);
+    cursor: pointer;
+    padding: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.2s;
+}
+
+.delete-btn:hover {
+    opacity: 0.8;
+}
+
+/* Info Sections */
+.info-section {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 24px;
+}
+
+.info-section.hidden {
+    display: none;
+}
+
+.info-card {
+    text-align: center;
+    max-width: 400px;
+}
+
+.info-title {
+    font-size: 24px;
+    color: var(--theme-color);
+    margin-bottom: 8px;
+}
+
+.info-text {
+    font-size: 14px;
+    color: var(--white);
+    line-height: 1.5;
+}
+
+/* Notes Section */
+.notes-section {
+    flex: 1;
+    padding: 8px 16px 100px;
+    overflow-y: auto;
+}
+
+.notes-section.hidden {
+    display: none;
+}
+
+.all-notes-title {
+    font-size: 36px;
+    color: var(--white);
+    margin: 8px 0 16px 24px;
+    font-weight: bold;
+}
+
+.notes-container {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    max-width: 100%;
+}
+
+.note-card {
+    background-color: var(--yellow);
+    color: var(--black);
+    padding: 15px;
+    border-radius: 15px;
+    cursor: pointer;
+    min-height: 60px;
+    display: flex;
+    align-items: center;
+    font-size: 25px;
+    font-weight: 500;
+    transition: transform 0.2s, box-shadow 0.2s;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+.note-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(255, 255, 255, 0.1);
+}
+
+/* Add Note Button */
+.add-note-btn {
+    position: fixed;
+    bottom: 32px;
+    right: 24px;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background-color: var(--theme-color);
+    color: var(--black);
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    transition: transform 0.2s, box-shadow 0.2s;
+    z-index: 100;
+}
+
+.add-note-btn.hidden {
+    display: none;
+}
+
+.add-note-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+}
+
+/* Note Editor */
+.note-editor {
+    flex: 1;
+    padding: 16px 24px;
+    overflow-y: auto;
+}
+
+.note-title {
+    width: 100%;
+    background: transparent;
+    border: none;
+    color: var(--white);
+    font-size: 30px;
+    font-weight: bold;
+    padding: 16px 0;
+    font-family: inherit;
+    outline: none;
+}
+
+.note-title::placeholder {
+    color: var(--white-lightest);
+}
+
+.title-rule {
+    color: var(--red);
+    font-size: 14px;
+    font-weight: bold;
+    margin: 8px 0;
+    padding-left: 16px;
+}
+
+.title-rule.hidden {
+    display: none;
+}
+
+.note-content {
+    width: 100%;
+    background: transparent;
+    border: none;
+    color: var(--white);
+    font-size: 18px;
+    padding: 8px 0;
+    font-family: inherit;
+    outline: none;
+    resize: none;
+    min-height: calc(100vh - 200px);
+    line-height: 1.6;
+}
+
+.note-content::placeholder {
+    color: var(--white-lightest);
+}
+
+/* Account Screen */
+.account-content {
+    flex: 1;
+    padding: 40px 24px;
+    max-width: 500px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.account-title {
+    font-size: 36px;
+    color: var(--white);
+    margin-bottom: 32px;
+    font-weight: bold;
+}
+
+.account-form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.account-form label {
+    font-size: 18px;
+    color: var(--white);
+    font-weight: 500;
+}
+
+.username-input {
+    width: 100%;
+    background: transparent;
+    border: 1px solid var(--white-lightest);
+    color: var(--white);
+    font-size: 18px;
+    padding: 12px 16px;
+    border-radius: 8px;
+    font-family: inherit;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.username-input:focus {
+    border-color: var(--theme-color);
+}
+
+.username-rule {
+    color: var(--red);
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.username-rule.hidden {
+    display: none;
+}
+
+.save-btn {
+    background-color: var(--theme-color);
+    color: var(--black);
+    border: none;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: opacity 0.2s;
+    margin-top: 8px;
+}
+
+.save-btn:hover {
+    opacity: 0.9;
+}
+
+.logout-btn {
+    background-color: transparent;
+    color: var(--white);
+    border: 1px solid var(--white);
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    margin-top: 8px;
+}
+
+.logout-btn:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Modal */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.modal.hidden {
+    display: none;
+}
+
+.modal-content {
+    background-color: var(--black);
+    border: 1px solid var(--white);
+    border-radius: 12px;
+    padding: 24px;
+    max-width: 400px;
+    width: 90%;
+    text-align: center;
+}
+
+.modal-content h3 {
+    color: var(--white);
+    font-size: 20px;
+    margin-bottom: 24px;
+}
+
+.color-options {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.color-option {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    border: 3px solid var(--white);
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.color-option:hover {
+    transform: scale(1.1);
+    box-shadow: 0 4px 12px rgba(255, 255, 255, 0.3);
+}
+
+.modal-actions {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    margin-top: 24px;
+}
+
+.confirm-btn {
+    background-color: var(--theme-color);
+    color: var(--black);
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: opacity 0.2s;
+}
+
+.confirm-btn:hover {
+    opacity: 0.9;
+}
+
+.cancel-btn {
+    background-color: transparent;
+    color: var(--white);
+    border: 1px solid var(--white);
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.cancel-btn:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Toast */
+.toast {
+    position: fixed;
+    bottom: 100px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: var(--theme-color);
+    color: var(--black);
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 500;
+    z-index: 2000;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    animation: slideUp 0.3s ease-out;
+}
+
+.toast.hidden {
+    display: none;
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateX(-50%) translateY(20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(-50%) translateY(0);
+        opacity: 1;
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .header {
+        padding: 0 16px;
+    }
+    
+    .app-name {
+        font-size: 20px;
+    }
+    
+    .login-detail {
+        font-size: 18px;
+    }
+    
+    .all-notes-title {
+        font-size: 28px;
+        margin-left: 16px;
+    }
+    
+    .notes-section {
+        padding: 8px 16px 100px;
+    }
+    
+    .note-editor {
+        padding: 16px;
+    }
+    
+    .note-title {
+        font-size: 24px;
+    }
+    
+    .note-content {
+        font-size: 16px;
+    }
+    
+    .account-content {
+        padding: 24px 16px;
+    }
+    
+    .account-title {
+        font-size: 28px;
+    }
+}
+
+/* Utility Classes */
+.hidden {
+    display: none !important;
+}
+
