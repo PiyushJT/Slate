@@ -13,7 +13,7 @@
     --white-lightest: rgba(255, 255, 255, 0.5);
     --red: #FF0000;
     --transparent: transparent;
-    
+
     /* Note Colors */
     --pink: #FF9E9E;
     --green: #91F48F;
@@ -51,6 +51,7 @@ body {
     padding: 0 24px;
     border-bottom: 1px solid var(--white);
     position: relative;
+    transition: background-color 0.3s ease;
 }
 
 .app-name {
@@ -72,22 +73,7 @@ body {
     opacity: 0.8;
 }
 
-.back-btn {
-    background: transparent;
-    border: none;
-    color: var(--white);
-    cursor: pointer;
-    padding: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-right: 16px;
-    transition: opacity 0.2s;
-}
 
-.back-btn:hover {
-    opacity: 0.8;
-}
 
 .header-actions {
     display: flex;
@@ -111,7 +97,8 @@ body {
     opacity: 0.9;
 }
 
-.delete-btn {
+.delete-btn,
+.save-note-btn {
     background: transparent;
     border: none;
     color: var(--white);
@@ -123,7 +110,8 @@ body {
     transition: opacity 0.2s;
 }
 
-.delete-btn:hover {
+.delete-btn:hover,
+.save-note-btn:hover {
     opacity: 0.8;
 }
 
@@ -494,6 +482,7 @@ body {
         transform: translateX(-50%) translateY(20px);
         opacity: 0;
     }
+
     to {
         transform: translateX(-50%) translateY(0);
         opacity: 1;
@@ -505,40 +494,40 @@ body {
     .header {
         padding: 0 16px;
     }
-    
+
     .app-name {
         font-size: 20px;
     }
-    
+
     .login-detail {
         font-size: 18px;
     }
-    
+
     .all-notes-title {
         font-size: 28px;
         margin-left: 16px;
     }
-    
+
     .notes-section {
         padding: 8px 16px 100px;
     }
-    
+
     .note-editor {
         padding: 16px;
     }
-    
+
     .note-title {
         font-size: 24px;
     }
-    
+
     .note-content {
         font-size: 16px;
     }
-    
+
     .account-content {
         padding: 24px 16px;
     }
-    
+
     .account-title {
         font-size: 28px;
     }
@@ -548,4 +537,3 @@ body {
 .hidden {
     display: none !important;
 }
-

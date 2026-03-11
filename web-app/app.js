@@ -3,6 +3,8 @@ let currentUser = null;
 let currentNoteId = null;
 let currentNoteColor = null;
 let notes = [];
+let previousHash = window.location.hash || '#/';
+let isSaving = false;
 
 // DOM Elements
 const mainScreen = document.getElementById('main-screen');
@@ -31,13 +33,74 @@ const usernameInput = document.getElementById('username-input');
 const usernameRule = document.getElementById('username-rule');
 const saveUsernameBtn = document.getElementById('save-username-btn');
 const logoutBtn = document.getElementById('logout-btn');
+const saveNoteBtn = document.getElementById('save-note-btn');
 const toast = document.getElementById('toast');
 
 // Utility Functions
 function showScreen(screen) {
     document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
     screen.classList.add('active');
+
+    // Update body class for styling if needed
+    document.body.className = screen.id;
 }
+
+// Router
+function router() {
+    const hash = window.location.hash || '#/';
+
+    // Navigation Guard for New Note
+    if (previousHash === '#/note/new' && hash !== '#/note/new' && !isSaving) {
+        const title = noteTitle.value.trim();
+        const content = noteContent.value.trim();
+        if (title || content) {
+            alert("The note is not yet saved");
+            // Revert hash without triggering guard again
+            isSaving = true;
+            window.location.hash = '#/note/new';
+            return;
+        }
+    }
+
+    isSaving = false;
+    previousHash = hash;
+
+    if (hash === '#/' || hash === '#') {
+        showScreen(mainScreen);
+    } else if (hash === '#/account') {
+        if (currentUser) {
+            usernameInput.value = loginDetail.textContent;
+            showScreen(accountScreen);
+        } else {
+            window.location.hash = '#/';
+        }
+    } else if (hash === '#/note/new') {
+        if (currentUser) {
+            // Only initialize UI if we aren't already on the new note screen
+            if (!noteScreen.classList.contains('active') || currentNoteId !== null) {
+                createNewNoteUI();
+            }
+        } else {
+            window.location.hash = '#/';
+        }
+    } else if (hash.startsWith('#/note/')) {
+        const noteId = hash.replace('#/note/', '');
+        const note = notes.find(n => n.noteKey === noteId);
+        if (note) {
+            // Only initialize UI if we aren't already on this specific note
+            if (currentNoteId !== noteId) {
+                openNoteUI(note);
+            }
+        } else if (notes.length > 0) {
+            // Note might still be loading, or doesn't exist
+            // For now, if we have notes and it's not found, go back
+            window.location.hash = '#/';
+        }
+    }
+}
+
+window.addEventListener('hashchange', router);
+window.addEventListener('load', router);
 
 function showToast(message) {
     toast.textContent = message;
@@ -64,9 +127,10 @@ auth.onAuthStateChanged((user) => {
         updateUI();
     } else {
         loginDetail.textContent = 'login';
-        showScreen(mainScreen);
+        window.location.hash = '#/';
         updateUI();
     }
+    router(); // Re-run router on auth change
 });
 
 // Load User Data
@@ -104,6 +168,7 @@ function loadUserData() {
         }
         renderNotes();
         updateUI();
+        router(); // Re-run router in case we were waiting for a note to load
     });
 }
 
@@ -135,30 +200,35 @@ function renderNotes() {
         noteCard.className = 'note-card';
         const color = note.noteColor || getRandomColor();
         noteCard.style.backgroundColor = color;
-        
-        const noteText = note.noteTitle || 
+
+        const noteText = note.noteTitle ||
             (note.note.length > 90 ? note.note.substring(0, 97) + '...' : note.note);
-        
+
         noteCard.textContent = noteText;
-        noteCard.addEventListener('click', () => openNote(note));
+        noteCard.addEventListener('click', () => {
+            window.location.hash = `#/note/${note.noteKey}`;
+        });
         notesContainer.appendChild(noteCard);
     });
 }
 
-// Open Note
-function openNote(note) {
+// UI helpers that don't change hash
+function openNoteUI(note) {
     currentNoteId = note.noteKey;
     currentNoteColor = note.noteColor || getRandomColor();
-    
+
     noteTitle.value = note.noteTitle || '';
     noteContent.value = note.note || '';
-    
+
     // Update header color
     changeBgTint(noteHeader, currentNoteColor);
     changeBgTint(colorBtn, currentNoteColor);
-    
+
+    // Hide save button for existing notes
+    saveNoteBtn.classList.add('hidden');
+
     showScreen(noteScreen);
-    
+
     // If note doesn't have color, save it
     if (!note.noteColor && currentUser) {
         const userId = currentUser.uid;
@@ -166,36 +236,48 @@ function openNote(note) {
     }
 }
 
-// Create New Note
-function createNewNote() {
+function createNewNoteUI() {
     currentNoteId = null;
     currentNoteColor = getRandomColor();
-    
+
     noteTitle.value = '';
     noteContent.value = '';
-    
+
     changeBgTint(noteHeader, currentNoteColor);
     changeBgTint(colorBtn, currentNoteColor);
-    
+
+    // Show save button for new notes
+    saveNoteBtn.classList.remove('hidden');
+
     showScreen(noteScreen);
+}
+
+// Open Note
+function openNote(note) {
+    window.location.hash = `#/note/${note.noteKey}`;
+}
+
+// Create New Note
+function createNewNote() {
+    window.location.hash = '#/note/new';
 }
 
 // Save Note
 function saveNote() {
     if (!currentUser) return;
-    
+
     const title = noteTitle.value.trim();
     const content = noteContent.value.trim();
-    
+
     if (!title && !content) return;
-    
+
     const userId = currentUser.uid;
     const noteData = {
         noteTitle: title,
         note: content,
         noteColor: currentNoteColor
     };
-    
+
     if (currentNoteId) {
         // Update existing note
         noteData.noteKey = currentNoteId;
@@ -212,13 +294,13 @@ function saveNote() {
 // Delete Note
 function deleteNote() {
     if (!currentUser || !currentNoteId) {
-        showScreen(mainScreen);
+        window.location.hash = '#/';
         return;
     }
-    
+
     const userId = currentUser.uid;
     database.ref(`${userId}/allNotes/${currentNoteId}`).remove();
-    showScreen(mainScreen);
+    window.location.hash = '#/';
 }
 
 // Show Color Picker
@@ -245,7 +327,7 @@ function showConfirmDialog(title, confirmText, onConfirm) {
     confirmTitle.textContent = title;
     confirmBtn.textContent = confirmText;
     confirmModal.classList.remove('hidden');
-    
+
     confirmBtn.onclick = () => {
         onConfirm();
         confirmModal.classList.add('hidden');
@@ -257,7 +339,7 @@ function signInWithGoogle() {
     const provider = new firebase.auth.GoogleAuthProvider();
     provider.addScope('email');
     provider.addScope('profile');
-    
+
     auth.signInWithPopup(provider)
         .then((result) => {
             // User signed in
@@ -268,7 +350,7 @@ function signInWithGoogle() {
             console.error('Sign in error:', error);
             console.error('Error code:', error.code);
             console.error('Error message:', error.message);
-            
+
             // Try redirect method if popup is blocked
             if (error.code === 'auth/popup-blocked' || error.code === 'auth/popup-closed-by-user') {
                 auth.signInWithRedirect(provider);
@@ -293,7 +375,7 @@ function logout() {
     auth.signOut()
         .then(() => {
             showToast('Successfully logged out');
-            showScreen(mainScreen);
+            window.location.hash = '#/';
         })
         .catch((error) => {
             console.error('Logout error:', error);
@@ -304,20 +386,20 @@ function logout() {
 // Save Username
 function saveUsername() {
     if (!currentUser) return;
-    
+
     const username = usernameInput.value.trim();
-    
+
     if (!username || username === 'login' || username === 'लॉगिन' || username === 'લોગિન') {
         showToast('Invalid Username');
         return;
     }
-    
+
     const userId = currentUser.uid;
     database.ref(`${userId}/username`).set(username)
         .then(() => {
             loginDetail.textContent = username;
             showToast('Successfully changed username');
-            showScreen(mainScreen);
+            window.location.hash = '#/';
         })
         .catch((error) => {
             console.error('Error saving username:', error);
@@ -332,30 +414,25 @@ loginDetail.addEventListener('click', () => {
     if (!currentUser) {
         signInWithGoogle();
     } else {
-        usernameInput.value = loginDetail.textContent;
-        showScreen(accountScreen);
+        window.location.hash = '#/account';
     }
 });
 
 // Add Note Button
 addNoteBtn.addEventListener('click', createNewNote);
 
-// Back Buttons
-backBtn.addEventListener('click', () => {
-    showScreen(mainScreen);
-});
+// Back Buttons (Now handled by hash/browser back)
+// These listeners will be removed once buttons are deleted from HTML
 
-accountBackBtn.addEventListener('click', () => {
-    showScreen(mainScreen);
-});
-
-// Note Editor - Auto Save
+// Note Editor - Auto Save for existing notes
 let saveTimeout;
 function debounceSave() {
+    if (!currentNoteId) return; // Only auto-save for existing notes
     clearTimeout(saveTimeout);
     saveTimeout = setTimeout(saveNote, 500);
 }
 
+// Note Editor - Event Listeners
 noteTitle.addEventListener('input', () => {
     debounceSave();
     if (noteTitle.value.length === 100) {
@@ -366,6 +443,24 @@ noteTitle.addEventListener('input', () => {
 });
 
 noteContent.addEventListener('input', debounceSave);
+
+saveNoteBtn.addEventListener('click', () => {
+    isSaving = true;
+    saveNote();
+    window.location.hash = '#/';
+});
+
+// Browser-level navigation guard
+window.addEventListener('beforeunload', (e) => {
+    if (window.location.hash === '#/note/new' && !isSaving) {
+        const title = noteTitle.value.trim();
+        const content = noteContent.value.trim();
+        if (title || content) {
+            e.preventDefault();
+            e.returnValue = '';
+        }
+    }
+});
 
 // Color Picker
 colorBtn.addEventListener('click', showColorPicker);
@@ -381,7 +476,7 @@ deleteNoteBtn.addEventListener('click', () => {
     if (currentNoteId) {
         showConfirmDialog('Confirm Delete', 'Delete', deleteNote);
     } else {
-        showScreen(mainScreen);
+        window.location.hash = '#/';
     }
 });
 

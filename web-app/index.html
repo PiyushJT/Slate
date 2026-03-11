@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,22 +15,23 @@
         import { initializeApp } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-app.js";
         // TODO: Add SDKs for Firebase products that you want to use
         // https://firebase.google.com/docs/web/setup#available-libraries
-      
+
         // Your web app's Firebase configuration
         const firebaseConfig = {
-          apiKey: "AIzaSyBNcjHow6H6GGOYujKnp75PZlyT6LGzKso",
-          authDomain: "slate-ae34b-fa076.firebaseapp.com",
-          databaseURL: "https://slate-ae34b-default-rtdb.asia-southeast1.firebasedatabase.app",
-          projectId: "slate-ae34b",
-          storageBucket: "slate-ae34b.firebasestorage.app",
-          messagingSenderId: "558370176302",
-          appId: "1:558370176302:web:f1693957121dd870e44ebf"
+            apiKey: "AIzaSyBNcjHow6H6GGOYujKnp75PZlyT6LGzKso",
+            authDomain: "slate-ae34b-fa076.firebaseapp.com",
+            databaseURL: "https://slate-ae34b-default-rtdb.asia-southeast1.firebasedatabase.app",
+            projectId: "slate-ae34b",
+            storageBucket: "slate-ae34b.firebasestorage.app",
+            messagingSenderId: "558370176302",
+            appId: "1:558370176302:web:f1693957121dd870e44ebf"
         };
-      
+
         // Initialize Firebase
         const app = initializeApp(firebaseConfig);
-      </script>
+    </script>
 </head>
+
 <body>
     <!-- Main Screen -->
     <div id="main-screen" class="screen active">
@@ -74,13 +76,13 @@
     <div id="note-screen" class="screen">
         <!-- Header -->
         <header id="note-header" class="header">
-            <button id="back-btn" class="back-btn">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M19 12H5M12 19l-7-7 7-7"/>
-                </svg>
-            </button>
             <h1 class="app-name">Slate</h1>
             <div class="header-actions">
+                <button id="save-note-btn" class="save-note-btn hidden" title="Save Note">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="20 6 9 17 4 12"></polyline>
+                    </svg>
+                </button>
                 <button id="color-btn" class="color-btn">BG</button>
                 <button id="delete-note-btn" class="delete-btn" title="Delete Note">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -103,11 +105,6 @@
     <div id="account-screen" class="screen">
         <!-- Header -->
         <header class="header">
-            <button id="account-back-btn" class="back-btn">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M19 12H5M12 19l-7-7 7-7"/>
-                </svg>
-            </button>
             <h1 class="app-name">Slate</h1>
         </header>
 
@@ -116,7 +113,8 @@
             <h2 class="account-title">Your Account</h2>
             <div class="account-form">
                 <label for="username-input">Username</label>
-                <input type="text" id="username-input" class="username-input" maxlength="12" placeholder="Enter username">
+                <input type="text" id="username-input" class="username-input" maxlength="12"
+                    placeholder="Enter username">
                 <div id="username-rule" class="username-rule hidden">*Username should not exceed 12 characters</div>
                 <button id="save-username-btn" class="save-btn">Save</button>
                 <button id="logout-btn" class="logout-btn">Log Out</button>
@@ -155,5 +153,5 @@
     <script src="config.js"></script>
     <script src="app.js"></script>
 </body>
-</html>
 
+</html>
